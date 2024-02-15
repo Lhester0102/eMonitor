@@ -58,28 +58,12 @@
 					<td><input type="number" name="quantity" placeholder="Quantity" required></td>
 				</tr>
 				<tr>
-					<td>Borrow ID:</td>
-					<td><input type="number" name="borrow_id" placeholder="Borrow ID" required></td>
-				</tr>
-				<tr>
-					<td>Date Request:</td>
-					<td><input type="date" name="date_request" placeholder="Date request" required></td>
-				</tr>
-				<tr>
-					<td>Date Return:</td>
-					<td><input type="date" name="date_return" placeholder="Date return" required></td>
-				</tr>
-				<tr>
-					<td>Reason:</td>
-					<td><textarea name="reason" placeholder="What is your reason" required></textarea></td>
-				</tr>
-				<tr>
 					<td align="center"><input type="reset" name="btn_reset" value="RESET"></td>
 					<td align="center"><input type="submit" name="btn_submit" value="SAVE"></td>
 				</tr>
 			</table>
 		</form>
 		<br>
-		<a href="index.php" class="backButton" style="text-decoration: none;"><h1 class="font-family"><i class="fa-regular fa-circle-left" style="color: #525CEB;"></i>   BACK</h1></a>
+		<a href="index.php">Back</a>
 	</body>
 </html>

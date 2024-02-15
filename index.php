@@ -12,8 +12,7 @@
 		<h1 align="center">Inventory Product List (Admin)</h1>
 		<a class='btn btn-primary' href="add.php">Add Product</a>
 		<a class='btn btn-danger' href="log-in.php">Log-out</a>
-		<a href="admin-dashboard.php">Back</a>
-		<a href="###">Unarchive</a>
+		<a href="###">Archive List</a>
 		<table class="table table-striped" border="1px" align="center">
 		<thead>
 			<tr align="center">
@@ -22,9 +21,6 @@
 				<th><b>Equipment Name</b></th>
 				<th><b>Equipment Brand</b></th>
 				<th><b>Quantity</b></th>
-				<th><b>Borrow ID</b></th>
-				<th><b>Date Request</b></th>
-				<th><b>Date Return</b></th>
 				<th colspan="2"><b>Action</b></th>
 			</tr>
 			</thead>
@@ -37,14 +33,12 @@
 					echo"<td>".$res['equipment_name']."</td>";
 					echo"<td>".$res['equipment_brand']."</td>";
 					echo"<td>".$res['quantity']."</td>";
-					echo"<td>".$res['borrow_id']."</td>";
-					echo"<td>".$res['date_request']."</td>";
-					echo"<td>".$res['date_return']."</td>";
 					echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$res[id]'>Edit</a></td>";
-					echo"<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Archive</a></td></tr>";
+					echo"<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Archive This</a></td></tr>";
 				}
 			?>
 			</tbody>
 		</table>
+		<a href="admin-dashboard.php">Back</a>
 	</body>
 </html>

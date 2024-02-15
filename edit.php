@@ -7,10 +7,6 @@
 	$equipMOdel="";
 	$equipType="";
 	$quantity="";
-	$borrowId="";
-	$dateRequest="";
-	$dateReturn="";
-	$reaSon="";
 	$rs=mysqli_query($mysqli,"select * from inventory where id=$id");
 	if($result=mysqli_fetch_array($rs))
 	{
@@ -20,10 +16,6 @@
 		$equipModel=$result["equipment_model"];
 		$equipType=$result["equipment_type"];
 		$quantity=$result["quantity"];
-		$borrowId=$result["borrow_id"];
-		$dateRequest=$result["date_request"];
-		$dateReturn=$result["date_return"];
-		$reaSon=$result["reason"];
 	}
 ?>
 <!DOCTYPE html>
@@ -65,22 +57,6 @@
 				<tr>
 					<td>Quantity:</td>
 					<td><input type="number" name="update_quantity" value="<?php echo $quantity; ?>" placeholder="Quantity" required></td>
-				</tr>
-				<tr>
-					<td>Borrow ID:</td>
-					<td><input type="number" name="update_borrowId" value="<?php echo $borrowId; ?>" placeholder="Borrow ID" required></td>
-				</tr>
-				<tr>
-					<td>Date Request:</td>
-					<td><input type="date" name="update_dateRequest" value="<?php echo $dateRequest; ?>" placeholder="Date request" required></td>
-				</tr>
-				<tr>
-					<td>Date Return:</td>
-					<td><input type="date" name="update_dateReturn" value="<?php echo $dateReturn; ?>" placeholder="Date return" required></td>
-				</tr>
-				<tr>
-					<td>Reason:</td>
-					<td><textarea name="update_reaSon" placeholder="What is your reason" required> <?php echo $reaSon; ?> </textarea></td>
 				</tr>
 				<tr>
 					<td align="center" colspan="2"><input type="submit" name="btnSubmit" value="UPDATE"></td>

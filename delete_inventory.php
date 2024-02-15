@@ -12,8 +12,8 @@ if (isset($_GET['id'])) {
 
     if ($inventory) {
         // Move the inventory information to an archive table
-        $archiveSql = "INSERT INTO archive_inventory (id, item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity, borrow_id, date_request, date_return, reason) 
-                       VALUES ('{$inventory['id']}', '{$inventory['item_code']}', '{$inventory['equipment_name']}', '{$inventory['equipment_brand']}', '{$inventory['equipment_model']}', '{$inventory['equipment_type']}', '{$inventory['quantity']}', '{$inventory['borrow_id']}', '{$inventory['date_request']}', '{$inventory['date_return']}', '{$inventory['reason']}')";
+        $archiveSql = "INSERT INTO archive_inventory (id, item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity) 
+                       VALUES ('{$inventory['id']}', '{$inventory['item_code']}', '{$inventory['equipment_name']}', '{$inventory['equipment_brand']}', '{$inventory['equipment_model']}', '{$inventory['equipment_type']}', '{$inventory['quantity']}')";
         mysqli_query($mysqli, $archiveSql);
 
         // Delete the inventory from the main table
