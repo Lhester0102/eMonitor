@@ -13,6 +13,7 @@
 		<a class='btn btn-primary' href="add.php">Add Product</a>
 		<a class='btn btn-danger' href="log-in.php">Log-out</a>
 		<a href="admin-dashboard.php">Back</a>
+		<a href="###">Unarchive</a>
 		<table class="table table-striped" border="1px" align="center">
 		<thead>
 			<tr align="center">
