@@ -40,7 +40,7 @@
 					echo"<td>".$res['date_request']."</td>";
 					echo"<td>".$res['date_return']."</td>";
 					echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$res[id]'>Edit</a></td>";
-					echo"<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Delete</a></td></tr>";
+					echo"<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Archive</a></td></tr>";
 				}
 			?>
 			</tbody>
