@@ -8,11 +8,7 @@
 		$e_model=$_POST['equipment_model'];
 		$e_type=$_POST['equipment_type'];
 		$quanty=$_POST['quantity'];
-		$b_id=$_POST['borrow_id'];
-		$d_request=$_POST['date_request'];
-		$d_return=$_POST['date_return'];
-		$reason=$_POST['reason'];
-		$rs=mysqli_query($mysqli,"Insert Into inventory(item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity, borrow_id, date_request, date_return, reason)values('$i_code','$e_name','$e_brand','$e_model','$e_type','$quanty','$b_id','$d_request','$d_return','$reason')");
+		$rs=mysqli_query($mysqli,"Insert Into inventory(item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity)values('$i_code','$e_name','$e_brand','$e_model','$e_type','$quanty')");
 		if($rs)
 		{
 			echo'<script>alert("Record Save Successfully)</script>';
@@ -22,6 +18,7 @@
 			echo'<script>alert("Save Record Error")</script>';
 		}
 	}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,11 +32,11 @@
 			<table border="1px">
 				<tr>
 					<td>Item Code:</td>
-					<td><input type="text" name="item_code" placeholder="Enter the item code" required></td>
+					<td><input type="text" name="item_code"  id="item_code"  placeholder="Enter the item code" required></td>
 				</tr>
 				<tr>
 					<td>Equipment Name:</td>
-					<td><input type="text" name="equipment_name" placeholder="Equipment name" required></td>
+					<td><input type="text" name="equipment_name"   id="equipment_name"  placeholder="Equipment name" required></td>
 				</tr>
 				<tr>
 					<td>Equipment Brand:</td>
@@ -65,5 +62,49 @@
 		</form>
 		<br>
 		<a href="index.php">Back</a>
+		
+
+		<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var scannedValue = ''; // Variable to accumulate scanned barcode
+
+    // Timestamp of the last keypress
+    var lastKeypressTimestamp = 0;
+
+    // Delay threshold between consecutive keypresses (in milliseconds)
+    var keypressDelayThreshold = 50;
+
+    document.addEventListener('keypress', function(event) {
+        var currentTimestamp = new Date().getTime();
+
+        // Calculate the time difference between this and the last keypress
+        var timeDiff = currentTimestamp - lastKeypressTimestamp;
+
+        // Reset scannedValue if there was a long delay between keypresses (indicating manual typing)
+        if (timeDiff > keypressDelayThreshold * 2) {
+            scannedValue = '';
+        }
+
+        // Update the lastKeypressTimestamp with the current timestamp
+        lastKeypressTimestamp = currentTimestamp;
+
+        // Append the pressed key to scannedValue
+        scannedValue += event.key;-
+
+        // Check if the value is a valid barcode
+        if (isValidBarcode(scannedValue)) {
+            // Do something with the valid barcode (e.g., assign it to a field)
+            document.getElementById('item_code').value = scannedValue;
+        }
+    });
+});
+
+function isValidBarcode(value) {
+    return /^[a-zA-Z0-9]+$/.test(value);
+}
+
+</script>
+
+
 	</body>
 </html>

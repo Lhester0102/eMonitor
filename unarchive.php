@@ -1,45 +1,16 @@
 <?php
-session_start();
-include_once("config.php");
-
-if (isset($_GET['id'])) {
-    $inventory_id = $_GET['id'];
-
-    // Retrieve the inventory information from the archive table
-    $sql = "SELECT * FROM archive_inventory WHERE id = '$inventory_id'";
-    $result = mysqli_query($mysqli, $sql);
-    $inventory = mysqli_fetch_assoc($result);
-
-    if ($inventory) {
-        // Move the inventory information back to the main table
-        $unarchiveSql = "INSERT INTO inventory (id, item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity, borrow_id, date_request, date_return, reason) 
-                       VALUES ('{$inventory['id']}', '{$inventory['item_code']}', '{$inventory['equipment_name']}', '{$inventory['equipment_brand']}', '{$inventory['equipment_model']}', '{$inventory['equipment_type']}', '{$inventory['quantity']}', '{$inventory['borrow_id']}', '{$inventory['date_request']}', '{$inventory['date_return']}', '{$inventory['reason']}')";
-        mysqli_query($mysqli, $unarchiveSql);
-
-        // Delete the inventory information from the archive table
-        $deleteSql = "DELETE FROM archive_inventory WHERE id = '$inventory_id'";
-        mysqli_query($mysqli, $deleteSql);
-
-        // Redirect to the main page with a success message
-        header("Location: inventoryArchive.php?unarchive_success=1");
-        exit();
-    }
-}
-
-// If the inventory ID is not provided or the inventory doesn't exist, redirect to the main page with an error message
-header("Location: index.php?error=1");
-exit();
+	include_once("config.php");
+	$rs=mysqli_query($mysqli, "select * from  archive_inventory");
 ?>
-
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Unarchive</title>
-    </head>
-    <body>
-        <a href="###">Back</a>
-        <table class="table table-striped" border="1px" align="center">
+	<head>
+		<title>e-Monitor</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">	</head>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<body>
+		<h1 align="center">Archive List (Admin)</h1>
+		<table class="table table-striped" border="1px" align="center">
 		<thead>
 			<tr align="center">
 				<th><b>ID</b></th>
@@ -59,12 +30,11 @@ exit();
 					echo"<td>".$res['equipment_name']."</td>";
 					echo"<td>".$res['equipment_brand']."</td>";
 					echo"<td>".$res['quantity']."</td>";
-					echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$res[id]'>Edit</a></td>";
-					echo"<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Archive This</a></td></tr>";
+					echo"<td><a class='btn btn-sm btn-danger' href='unarchive_item.php?id=$res[id]'>Unarchive This</a> &nbsp;&nbsp; <a class='btn btn-sm btn-danger' href='permanent_delete.php?id=$res[id]'>Permanent Delete</a></td></tr>";
 				}
 			?>
 			</tbody>
 		</table>
-		<a href="admin-dashboard.php">Back</a>
+		<a href="index.php">Back</a>
 	</body>
 </html>
