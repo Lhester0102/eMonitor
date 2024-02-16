@@ -18,9 +18,6 @@
 				<th><b>Equipment Name</b></th>
 				<th><b>Equipment Brand</b></th>
 				<th><b>Quantity</b></th>
-				<th><b>Borrow ID</b></th>
-				<th><b>Date Request</b></th>
-				<th><b>Date Return</b></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -32,9 +29,6 @@
 					echo"<td>".$res['equipment_name']."</td>";
 					echo"<td>".$res['equipment_brand']."</td>";
 					echo"<td>".$res['quantity']."</td>";
-					echo"<td>".$res['borrow_id']."</td>";
-					echo"<td>".$res['date_request']."</td>";
-					echo"<td>".$res['date_return']."</td>";
 				}
 			?>
 			</tbody>
