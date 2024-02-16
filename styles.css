@@ -5,7 +5,11 @@ body
     justify-content: center;
 	align-items: center;
 	padding: 10px;
+<<<<<<< HEAD
 	background-color: #646262; //#80ccff
+=======
+	background-color: #646262; 
+>>>>>>> 919da1d (design dashboard)
 }
 .login
 {
@@ -265,7 +269,12 @@ html
 	width: 138px;
 	height: 39px;
 	top: 10px;
+<<<<<<< HEAD
 	left: 1170px;
+=======
+	/* left: 1170px; */
+	float: right;
+>>>>>>> 919da1d (design dashboard)
 	border: none;
 	border-radius: 15px;
 	background: #FFF;
@@ -281,7 +290,12 @@ html
 	width: 138px;
 	height: 39px;
 	top: 10px;
+<<<<<<< HEAD
 	left: 1330px;
+=======
+	/* left: 1330px; */
+	float: right;
+>>>>>>> 919da1d (design dashboard)
 	border: none;
 	border-radius: 15px;
 	background: #575757;
