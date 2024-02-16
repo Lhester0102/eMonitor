@@ -17,7 +17,8 @@
 				<th><b>Item Code</b></th>
 				<th><b>Equipment Name</b></th>
 				<th><b>Equipment Brand</b></th>
-				<th><b>Quantity</b></th>
+				<th><b>Quantities</b></th>
+
 			</tr>
 			</thead>
 			<tbody>
