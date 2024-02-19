@@ -24,87 +24,160 @@
 <html>
 	<head>
 		<title> View All Inventory </title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<style>
+			body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .card-title {
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .sidebar {
+            width: 100%;
+            background-color: #044e85;
+            overflow: hidden;
+        }
+
+        .sidebar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .sidebar a:hover {
+            background-color: #1d6193;
+        }
+		</style>
+	</head>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<body>
-		<h1>Add Product (Admin)</h1>
+		<div class="sidebar">
+			<a href="index.php">Back</a>
+		</div>
 		<form method="post" action="#">
-			<table border="1px">
-				<tr>
-					<td>Item Code:</td>
-					<td><input type="text" name="item_code"  id="item_code"  placeholder="Enter the item code" required></td>
-				</tr>
-				<tr>
-					<td>Equipment Name:</td>
-					<td><input type="text" name="equipment_name"   id="equipment_name"  placeholder="Equipment name" required></td>
-				</tr>
-				<tr>
-					<td>Equipment Brand:</td>
-					<td><input type="text" name="equipment_brand" placeholder="Equipment brand" required></td>
-				</tr>
-				<tr>
-					<td>Equipment Model:</td>
-					<td><input type="text" name="equipment_model" placeholder="Equipment model" required></td>
-				</tr>
-				<tr>
-					<td>Equipment Type:</td>
-					<td><input type="text" name="equipment_type" placeholder="Enter the equipment type" required></td>
-				</tr>
-				<tr>
-					<td>Quantity:</td>
-					<td><input type="number" name="quantity" placeholder="Quantity" required></td>
-				</tr>
-				<tr>
-					<td align="center"><input type="reset" name="btn_reset" value="RESET"></td>
-					<td align="center"><input type="submit" name="btn_submit" value="SAVE"></td>
-				</tr>
-			</table>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="card shadow">
+							<form method="post" action="#">
+								<div class="mb-3">
+									<label for="item_code" class="form-label">Item Code:</label>
+									<input type="text" class="form-control" id="item_code" name="item_code" placeholder="Enter the item code" required>
+								</div>
+								<div class="mb-3">
+									<label for="equipment_name" class="form-label">Equipment Name:</label>
+									<input type="text" class="form-control" id="equipment_name" name="equipment_name" placeholder="Equipment name" required>
+								</div>
+								<div class="mb-3">
+									<label for="equipment_brand" class="form-label">Equipment Brand:</label>
+									<input type="text" class="form-control" id="equipment_brand" name="equipment_brand" placeholder="Equipment brand" required>
+								</div>
+								<div class="mb-3">
+									<label for="equipment_model" class="form-label">Equipment Model:</label>
+									<input type="text" class="form-control" id="equipment_model" name="equipment_model" placeholder="Equipment model" required>
+								</div>
+								<div class="mb-3">
+									<label for="equipment_type" class="form-label">Equipment Type:</label>
+									<input type="text" class="form-control" id="equipment_type" name="equipment_type" placeholder="Enter the equipment type" required>
+								</div>
+								<div class="mb-3">
+									<label for="quantity" class="form-label">Quantity:</label>
+									<input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity" required>
+								</div>
+								<div class="d-grid gap-2">
+									<button type="reset" class="btn btn-secondary">Reset</button>
+									<button type="submit" name="btn_submit" class="btn btn-primary">Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</form>
-		<br>
-		<a href="index.php">Back</a>
 		
-
 		<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var scannedValue = ''; // Variable to accumulate scanned barcode
+				document.addEventListener('DOMContentLoaded', function() {
+				var scannedValue = ''; // Variable to accumulate scanned barcode
 
-    // Timestamp of the last keypress
-    var lastKeypressTimestamp = 0;
+				// Timestamp of the last keypress
+				var lastKeypressTimestamp = 0;
 
-    // Delay threshold between consecutive keypresses (in milliseconds)
-    var keypressDelayThreshold = 50;
+				// Delay threshold between consecutive keypresses (in milliseconds)
+				var keypressDelayThreshold = 50;
 
-    document.addEventListener('keypress', function(event) {
-        var currentTimestamp = new Date().getTime();
+				document.addEventListener('keypress', function(event) {
+					var currentTimestamp = new Date().getTime();
 
-        // Calculate the time difference between this and the last keypress
-        var timeDiff = currentTimestamp - lastKeypressTimestamp;
+					// Calculate the time difference between this and the last keypress
+					var timeDiff = currentTimestamp - lastKeypressTimestamp;
 
-        // Reset scannedValue if there was a long delay between keypresses (indicating manual typing)
-        if (timeDiff > keypressDelayThreshold * 2) {
-            scannedValue = '';
-        }
+					// Reset scannedValue if there was a long delay between keypresses (indicating manual typing)
+					if (timeDiff > keypressDelayThreshold * 2) {
+						scannedValue = '';
+					}
 
-        // Update the lastKeypressTimestamp with the current timestamp
-        lastKeypressTimestamp = currentTimestamp;
+					// Update the lastKeypressTimestamp with the current timestamp
+					lastKeypressTimestamp = currentTimestamp;
 
-        // Append the pressed key to scannedValue
-        scannedValue += event.key;-
+					// Append the pressed key to scannedValue
+					scannedValue += event.key;-
 
-        // Check if the value is a valid barcode
-        if (isValidBarcode(scannedValue)) {
-            // Do something with the valid barcode (e.g., assign it to a field)
-            document.getElementById('item_code').value = scannedValue;
-        }
-    });
-});
+					// Check if the value is a valid barcode
+					if (isValidBarcode(scannedValue)) {
+						// Do something with the valid barcode (e.g., assign it to a field)
+						document.getElementById('item_code').value = scannedValue;
+					}
+				});
+			});
 
-function isValidBarcode(value) {
-    return /^[a-zA-Z0-9]+$/.test(value);
-}
+			function isValidBarcode(value) {
+				return /^[a-zA-Z0-9]+$/.test(value);
+			}
 
-</script>
-
-
+		</script>
 	</body>
 </html>

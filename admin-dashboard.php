@@ -9,12 +9,7 @@
 		<div class="header">
 			<h1 class="txt_title">ADMINISTRATOR</h1>
 		</div>
-		<div class="header2">
-			<button class="btn_settings">SETTINGS</button>
-			<form action="log-in.php">
-				<button class="btn_logout">LOG OUT</button>
-			</form>
-		</div>
+		<div class="header2"></div>
 		<div class="container1"></div>
 		<div class="container2"></div>
 		<div class="container3"></div>
