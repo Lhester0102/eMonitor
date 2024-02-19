@@ -27,24 +27,101 @@
 	}
 ?>
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<title> E-monitor(A web-based Application for the Inventory Management of DCCP Laoag City) </title>
-		<link rel="stylesheet" href="styles.css">
-	</head>
-	<body> 
-		<form method="post" action="log-in.php">
-			<div class="login">
-				<img src="dccplogo.png" class="logo">
-				<h1 class="title"> Data Center College of the Philippines </h1>
-				<h1 class="txt_username"> Username </h1>
-				<input type="Username" name="username" class="txtfield_username" placeholder="Username as your ID Number" required>
-				<h1 class="txt_password"> Password </h1>
-				<input type="Password" name="password" class="txtfield_password" placeholder="Password should haveat least 8 characters" required>
-				<button type="submit" name="btn_login" class="btn_login" value="Login" style="color: white;"> Login </button>
-				<p><a href="###" style="text-decoration: none;" class="sign-up_link"> Register </a></p>
-			</div>
-		</form>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Adding space for the logo */
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        #logo {
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Add margin to create space between logo and heading */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #show-hide-password {
+            color: blue;
+            cursor: pointer;
+        }
+
+        #show-hide-password:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="log-in.php">
+        <div id="login-container">
+            <!-- Add your logo here -->
+            <img id="logo" src="dccplogo.png" alt="Logo">
+            <h2>Data Center College of <br> Philippines of Laoag City, Inc.</h2>
+            <form id="login-form">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <br>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <span id="show-hide-password" onclick="togglePassword()">Show Password</span>
+                <br>
+                <input type="submit" name="btn_login" value="Login">
+            </form>
+        </div>
+    </form>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var showHideBtn = document.getElementById("show-hide-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                showHideBtn.textContent = "Hide Password";
+            } else {
+                passwordField.type = "password";
+                showHideBtn.textContent = "Show Password";
+            }
+        }
+    </script>
+</body>
 </html>
