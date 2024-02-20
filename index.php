@@ -108,7 +108,7 @@
 				<?php
 					while($res=mysqli_fetch_array($rs))
 					{
-						echo"<tr> <td>".$res['id']."</td>";
+						echo"<tr align='center'> <td>".$res['id']."</td>";
 						echo"<td>".$res['item_code']."</td>";
 						echo"<td>".$res['equipment_name']."</td>";
 						echo"<td>".$res['equipment_brand']."</td>";

@@ -79,7 +79,7 @@
                 color: #0056b3;
             }
 
-            /*Navigation Bar*/
+            /*Navigation Bar (sidebar)*/
             body {
                         font-family: Arial, sans-serif;
                         margin: 0;
