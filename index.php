@@ -91,6 +91,7 @@
 		<div class="sidebar">
 			<a href="add.php">Add Product</a>
 			<a href="unarchive.php">Archive List</a>
+			<a href="match-product.php">Barcode</a>
 		</div>
 		<table class="table table-striped" border="1px" align="center">
 			<thead>
