@@ -1,13 +1,8 @@
-<?php
-	include_once("config.php");
-	$rs=mysqli_query($mysqli, "select * from account");
-?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Admin Dashboard</title>
+	<title>User Dashboard</title>
 	<style>
 		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 		.row.content {
@@ -41,19 +36,13 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="admin-dashboard.php">Dashboard</a>
+						<a class="nav-link" href="supply_user_dashboard.php">Dashboard</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="supply_officer.php">Supply Officers</a>
+						<a class="nav-link" href=" ">???</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="instructor.php">Instructors</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="index.php">Inventory</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="reports.php">Reports</a>
+						<a class="nav-link" href=" ">???</a>
 					</li>
 					<!-- <li class="nav-item dropdown" stylesheet="float:right">
 				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
@@ -72,7 +61,7 @@
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="#">Profile</a></li>
 								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="log-out.php">Sign Out</a></li>
+								<li><a class="dropdown-item" href="log-in.php">Sign Out</a></li>
 							</ul>
 						</li>
 						</li>
@@ -84,28 +73,15 @@
 
 	<div class="col-sm-12" style="text-align:center;color:black">
 		<div class="well ms-5 me-5 mt-2" style="text-align:center;background:blue;color:white">
-			<h1>Admin Dashboard</h1>
+			<h1>User Dashboard</h1>
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="well">
 					<div class="card ms-5 me-5 mt-3 p-3">
-						<h1>SUPPLY OFFICER</h1>
+						<h1>???</h1>
 						<p>
-						<h1><b>
-
-
-
-
-
-							<?php
-    $rs = mysqli_query($mysqli, "SELECT * FROM account WHERE user_type = 'supply_user'");
-    $rowCount = mysqli_num_rows($rs);
-    echo $rowCount;
-?>
-
-
-						</b></h1>
+						<h1><b>0</b></h1>
 						</p>
 						<p><a href="#">Full Details</a></p>
 					</div>
@@ -114,64 +90,9 @@
 			<div class="col-sm-6">
 				<div class="well">
 					<div class="card ms-5 me-5 mt-3 p-3">
-						<h1>INSTRUCTORS</h1>
+						<h1>???</h1>
 						<p>
-						<h1><b>
-
-
-
-
-
-							<?php
-    $rs = mysqli_query($mysqli, "SELECT * FROM account WHERE user_type = 'user'");
-    $rowCount = mysqli_num_rows($rs);
-    echo $rowCount;
-?>
-
-
-						</b></h1>
-						</p>
-						<p><a href="#">Full Details</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="well">
-					<div class="card ms-5 me-5 mt-3 p-3">
-						<h1>INVENTORY</h1>
-						<?php
-						include_once("config.php");
-						$dash_category_query = "SELECT * from inventory";
-						$dash_category_query_run = mysqli_query($mysqli, $dash_category_query);
-						if ($category_total = mysqli_num_rows($dash_category_query_run)) {
-							echo '<p><h1><b>' . $category_total . ' </b></h1></p> ';
-						} else {
-							echo '<p><h1><b> No Data </b></h1></p> ';
-						}
-						?>
-						<p><a href="index.php">Full Details</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="well">
-					<div class="card ms-5 me-5 mt-3 p-3">
-						<h1>REPORTS</h1>
-						<p>
-						<h1><b>
-
-
-
-
-
-							<?php
-    $rs = mysqli_query($mysqli, "SELECT * FROM inventory WHERE request = '1'");
-    $rowCount = mysqli_num_rows($rs);
-    echo $rowCount;
-?>
-
-
-						</b></h1>
+						<h1><b>0</b></h1>
 						</p>
 						<p><a href="#">Full Details</a></p>
 					</div>

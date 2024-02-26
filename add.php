@@ -8,14 +8,17 @@
 		$e_model=$_POST['equipment_model'];
 		$e_type=$_POST['equipment_type'];
 		$quanty=$_POST['quantity'];
-		$rs=mysqli_query($mysqli,"Insert Into inventory(item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity)values('$i_code','$e_name','$e_brand','$e_model','$e_type','$quanty')");
+		$item_type=$_POST['item_type'];
+		$rs=mysqli_query($mysqli,"Insert Into inventory(item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity, item_type)values('$i_code','$e_name','$e_brand','$e_model','$e_type','$quanty','$item_type')");
 		if($rs)
 		{
 			echo'<script>alert("Record Save Successfully)</script>';
+			header("Location: index.php");
 		}
 		else
 		{
 			echo'<script>alert("Save Record Error")</script>';
+			header("Location: index.php");
 		}
 	}
 
@@ -127,6 +130,13 @@
 								<div class="mb-3">
 									<label for="quantity" class="form-label">Quantity:</label>
 									<input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity" required>
+								</div>
+								<div class="mb-3">
+    								<label for="item_type" class="form-label">Item Type:</label>
+    								<select class="form-select" id="item_type" name="item_type" required>
+        								<option value="consumable">Consumable</option>
+        								<option value="non-consumable">Non-Consumable</option>
+    								</select>
 								</div>
 								<div class="d-grid gap-2">
 									<button type="reset" class="btn btn-secondary">Reset</button>

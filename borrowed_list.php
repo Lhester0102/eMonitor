@@ -1,11 +1,11 @@
 <?php
 	include_once("config.php");
-	$rs=mysqli_query($mysqli, "select * from  archive_inventory");
+	$rs=mysqli_query($mysqli, "select * from  borrowed_item");
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>e-Monitor</title>
+		<title>e-Monitor | Borrowed List</title>
 		<style>
 			body {
             font-family: Arial, sans-serif;
@@ -42,12 +42,9 @@
 		<table class="table table-striped w-75" border="1px" align="center">
 		<thead>
 			<tr align="center">
-				<th><b>ID</b></th>
-				<th><b>Barode ID</b></th>
-				<th><b>Equipment Name</b></th>
-				<th><b>Equipment Brand</b></th>
-				<th><b>Quantity</b></th>
-				<th><b>Item Type</b></th>
+				<th><b>Item ID</b></th>
+				<th><b>Date Borrowed</b></th>
+				<th><b>Borrowed</b></th>
 				<th colspan="2"><b>Action</b></th>
 			</tr>
 			</thead>
@@ -55,13 +52,10 @@
 			<?php
 				while($res=mysqli_fetch_array($rs))
 				{
-					echo"<tr align='center'> <td>".$res['id']."</td>";
-					echo"<td align='center'>".$res['item_code']."</td>";
-					echo"<td align='center'>".$res['equipment_name']."</td>";
-					echo"<td align='center'>".$res['equipment_brand']."</td>";
-					echo"<td align='center'>".$res['quantity']."</td>";
-					echo"<td align='center'>".$res['item_type']."</td>";
-					echo"<td align='center'><a class='btn btn-sm btn-danger' href='unarchive_item.php?id=$res[id]'>Unarchive This</a> &nbsp;&nbsp; <a class='btn btn-sm btn-danger' href='permanent_delete.php?id=$res[id]'>Permanent Delete</a></td></tr>";
+					echo"<td align='center'>".$res['item-code']."</td>";
+					echo"<td align='center'>".$res['borrow-date']."</td>";
+					echo"<td align='center'>".$res['borrower']."</td>";
+					echo"<td  align='center'><a class='btn btn-sm btn-warning' href=''>Reset</a></td></tr>";
 				}
 			?>
 			</tbody>

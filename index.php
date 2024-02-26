@@ -88,36 +88,79 @@
 			</div>
 		</div>
 		</nav>
-		<div class="sidebar">
-			<a href="add.php">Add Product</a>
-			<a href="unarchive.php">Archive List</a>
-			<a href="match-product.php">Barcode</a>
-		</div>
-		<table class="table table-striped" border="1px" align="center">
-			<thead>
-				<tr align="center">
+		<div class="sidebar p-1">
+			<a class="me-1 btn btn-primary" href="add.php">Add Product</a>
+			<a class="me-1 btn btn-secondary"   href="unarchive.php">Archive List</a>
+			<a class="me-1 btn btn-secondary"  href="borrowed_list.php">Borrowed List</a>
+			<a class="me-1 btn btn-success"  href="match-product.php">Barcode</a>
+			<a class="me-1 btn btn-primary" onclick="toggleText()">Switch Item Type</a>
+		</div><br>
+		<table class="table table-striped w-75" border="1px" align="center">
+			<thead >
+				<tr align="center" >
 					<th><b>ID</b></th>
 					<th><b>Barode ID</b></th>
 					<th><b>Equipment Name</b></th>
 					<th><b>Equipment Brand</b></th>
-					<th><b>Quantity</b></th>
+					<th><b>Available No.</b></th>
+					<th><b>Borrowed No.</b></th>
+					<th><b>Item Type</b></th>
 					<th colspan="2"><b>Action</b></th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					while($res=mysqli_fetch_array($rs))
-					{
-						echo"<tr align='center'> <td>".$res['id']."</td>";
-						echo"<td>".$res['item_code']."</td>";
-						echo"<td>".$res['equipment_name']."</td>";
-						echo"<td>".$res['equipment_brand']."</td>";
-						echo"<td>".$res['quantity']."</td>";
-						echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$res[id]'>Edit</a></td>";
-						echo"<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Archive This</a></td></tr>";
-					}
-				?>
+    while ($res = mysqli_fetch_array($rs)) {
+        $itemTypeClass = ($res['item_type'] == 'consumable') ? 'consumable' : 'non-consumable';
+
+        echo "<tr align='center' class='$itemTypeClass'> <td>" . $res['id'] . "</td>";
+        echo "<td>" . $res['item_code'] . "</td>";
+        echo "<td>" . $res['equipment_name'] . "</td>";
+        echo "<td>" . $res['equipment_brand'] . "</td>";
+        echo "<td>" . $res['quantity'] . "</td>";
+        echo "<td>" . $res['borrow_no'] . "</td>";
+        echo "<td>" . $res['item_type'] . "</td>";
+        echo "<td><a class='btn btn-sm btn-warning' href='edit.php?id=$res[id]'>Edit</a></td>";
+        echo "<td><a class='btn btn-sm btn-danger' href='delete_inventory.php?id=$res[id]'>Archive This</a></td></tr>";
+    }
+?>
 			</tbody>
 		</table>
+
+
+<script>
+    var showConsumable = false;
+
+    function toggleText() {
+        showConsumable = !showConsumable; // Toggle the flag
+
+        var consumableRows = document.getElementsByClassName("consumable");
+        var nonConsumableRows = document.getElementsByClassName("non-consumable");
+
+        for (var i = 0; i < consumableRows.length; i++) {
+            consumableRows[i].style.display = 'none';
+        }
+        for (var i = 0; i < nonConsumableRows.length; i++) {
+            nonConsumableRows[i].style.display = 'none';
+        }
+
+        if (showConsumable) {
+            for (var i = 0; i < consumableRows.length; i++) {
+                consumableRows[i].style.display = 'table-row';
+            }
+        } else {
+            for (var i = 0; i < nonConsumableRows.length; i++) {
+                nonConsumableRows[i].style.display = 'table-row';
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var nonConsumableRows = document.getElementsByClassName("non-consumable");
+        for (var i = 0; i < nonConsumableRows.length; i++) {
+            nonConsumableRows[i].style.display = 'table-row';
+        }
+    });
+</script>
 	</body>
 </html>

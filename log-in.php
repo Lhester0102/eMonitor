@@ -1,31 +1,36 @@
 <?php
-	include_once("config.php");
-	if(isset($_REQUEST['btn_login']))
-	{
-		$un=$_REQUEST['username'];
-		$pass=$_REQUEST['password'];
-		$btn=$_REQUEST['btn_login'];
-		$rs=mysqli_query($mysqli,"select * from account where username='$un' and password='$pass'");
-		$count=mysqli_num_rows($rs);
-		if($count==1)
-		{
-			$result = mysqli_fetch_array($rs);
-			$type = $result['user_type'];
-			if(strcmp($type,"admin")==0)
-			{
-				header("Location: admin-dashboard.php");
-			}
-			else
-			{
-				header("Location:instructor.php");
-			}
-		}
-		else
-		{
-			echo '<script>alert("Error Login")</script>';
-		}
-	}
+session_start();
+include_once("config.php");
+
+
+if (isset($_REQUEST['btn_login'])) {
+    $un = $_REQUEST['username'];
+    $pass = $_REQUEST['password'];
+    $btn = $_REQUEST['btn_login'];
+
+    $rs = mysqli_query($mysqli, "SELECT * FROM account WHERE username='$un' AND password='$pass'");
+    $count = mysqli_num_rows($rs);
+
+    if ($count == 1) {
+        $result = mysqli_fetch_array($rs);
+        $type = $result['user_type'];
+        $_SESSION['username'] = $un;
+
+        if (strcmp($type, "admin") == 0) {
+            header("Location: admin-dashboard.php");
+        } elseif (strcmp($type, "user") == 0) {
+            header("Location: user_dashboard.php");
+        } elseif (strcmp($type, "supply_user") == 0) {
+            header("Location: supply_user_dashboard.php");
+        } else {
+            echo '<script>alert("Error Login")</script>';
+        }
+    } else {
+        echo '<script>alert("Error Login")</script>';
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

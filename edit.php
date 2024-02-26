@@ -7,6 +7,8 @@
 	$equipMOdel="";
 	$equipType="";
 	$quantity="";
+    $borrow_no="";
+    $item_type="";
 	$rs=mysqli_query($mysqli,"select * from inventory where id=$id");
 	if($result=mysqli_fetch_array($rs))
 	{
@@ -16,6 +18,8 @@
 		$equipModel=$result["equipment_model"];
 		$equipType=$result["equipment_type"];
 		$quantity=$result["quantity"];
+        $borrow_no=$result["borrow_no"];
+        $item_type=$result["item_type"];
 	}
 ?>
 <!DOCTYPE html>
@@ -140,8 +144,23 @@
                 <td><input type="text" name="update_equipType" value="<?php echo $equipType; ?>" placeholder="Enter the equipment type" required></td>
             </tr>
             <tr>
-                <td>Quantity:</td>
+                <td>Avilable No.:</td>
                 <td><input type="number" name="update_quantity" value="<?php echo $quantity; ?>" placeholder="Quantity" required></td>
+            </tr>
+            <tr>
+                <td>Borrowed No.:</td>
+                <td><input type="number" name="update_borrow_no" value="<?php echo $borrow_no; ?>" placeholder="Quantity" required></td>
+            </tr>
+            <tr>
+            <tr>
+                <td>Item Type:</td>
+                <td>
+                    <select name="update_item_type" required>
+                    <option value="consumable" <?php echo ($item_type === 'consumable') ? 'selected' : ''; ?>>Consumable</option>
+                    <option value="non-consumable" <?php echo ($item_type === 'non-consumable') ? 'selected' : ''; ?>>Non-Consumable</option>
+                    </select>
+                </td>
+
             </tr>
             <tr>
                 <td align="center" colspan="2"><input type="submit" name="btnSubmit" value="UPDATE"></td>

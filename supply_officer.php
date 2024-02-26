@@ -50,12 +50,8 @@
 		</div>
 		</nav>
 		<div class="sidebar p-1">
-			<a class="me-1 btn btn-primary" href="add.php">Add Instructor</a>
+			<a class="me-1 btn btn-primary" href="add.php">Add Supply Officer</a>
 		</div>
-
-
-
-
 		<table class="table table-striped w-75" border="1px" align="center">
 			<thead >
 				<tr align="center" >
@@ -68,7 +64,7 @@
 			<tbody>
 				<?php
     while ($res = mysqli_fetch_array($rs)) {
-        if ($res['user_type'] == 'user') {
+        if ($res['user_type'] == 'supply_user') {
             echo "<tr align='center' ><td>" . $res['UID'] . "</td>";
             echo "<td>" . $res['username'] . "</td>";
             echo "<td>" . $res['password'] . "</td>";
@@ -77,6 +73,7 @@
         }
     }
 ?>
+
 			</tbody>
 		</table>
 

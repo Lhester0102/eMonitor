@@ -108,12 +108,25 @@
 
         </style>
         <script type="text/javascript">
-        function scanBarcode() {
+            
+        /*function scanBarcode() {
             var barcode = document.getElementById('barcode').value;
             // You can use AJAX to send the barcode to the server and fetch the product name
             // Here, for demonstration, we'll just redirect to a new page with the barcode
             window.location.href = "index.php?barcode=" + barcode;
-        }
+        } */
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Add event listener to barcode input field
+        document.getElementById('barcode').addEventListener('input', function(event) {
+            var barcode = event.target.value.trim();
+            if (barcode !== '') {
+                // Submit the form when barcode is scanned
+                document.getElementById('barcodeForm').submit();
+            }
+        });
+    });
+
     </script>
     </head>
     <body>
