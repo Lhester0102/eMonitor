@@ -1,6 +1,6 @@
 <?php
 	include_once("config.php");
-	$rs=mysqli_query($mysqli, "select * from account");
+	$rs=mysqli_query($mysqli, "select * from borrowed_item");
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,36 +55,32 @@
 			</div>
 		</div>
 		</nav>
-		<div class="sidebar p-1">
-			<a class="me-1 btn btn-primary" href="add_ins.php">Add Instructor</a>
-		</div>
-
-
 
 
 		<table class="table table-striped w-75" border="1px" align="center">
 			<thead >
 				<tr align="center" >
-					<th><b>UID</b></th>
-					<th><b>Username</b></th>
-					<th><b>Password</b></th>
-					<th><b>Email</b></th>
-					<th colspan="2"><b>Action</b></th>
+					<th><b>ID</b></th>
+					<th><b>Equipment Name</b></th>
+					<th><b>Borrower</b></th>
+					<th><b>Borrow Date</b></th>
+					<th><b>Action</b></th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php
+
+			
+<?php
     while ($res = mysqli_fetch_array($rs)) {
-        if ($res['user_type'] == 'user') {
-            echo "<tr align='center' ><td>" . $res['UID'] . "</td>";
-            echo "<td>" . $res['username'] . "</td>";
-            echo "<td>" . $res['password'] . "</td>";
-            echo "<td>" . $res['email'] . "</td>";
-            echo "<td><a class='btn btn-sm btn-warning' href='edit_user.php?id=$res[UID]'>Edit User</a></td>";
-            echo "<td><a class='btn btn-sm btn-danger' href='delete_user.php?id=$res[UID]'>Delete User</a></td></tr>";
-        }
+            echo "<tr align='center' ><td>" . $res['item_code'] . "</td>";
+            echo "<td>" . $res['equipment_name'] . "</td>";
+            echo "<td>" . $res['borrower'] . "</td>";
+            echo "<td>" . $res['borrow_date'] . "</td>";
+            echo "<td><a class='btn btn-sm btn-warning' href='return.php?useless=$res[useless]&item_code=" . $res['item_code'] . "'>Reset</a></td>";
     }
 ?>
+
+
 			</tbody>
 		</table>
 

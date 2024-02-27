@@ -26,6 +26,6 @@ if (isset($_GET['id']) && isset($_GET['action'])) {
     }
 }
 
-header("Location: reports.php");
+header("Location: request.php");
 exit();
 ?>

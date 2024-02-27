@@ -1,7 +1,15 @@
 <?php
     session_start();
 	include_once("config.php");
-$name = $_SESSION['username'];
+    $name = $_SESSION['username'];
+    $email_query = mysqli_query($mysqli, "SELECT * FROM account WHERE username = '$name'");
+    if($email_query) {
+        $row = mysqli_fetch_array($email_query);
+        $email = $row['email'];
+        $_SESSION['email'] = $email;
+    } else {
+        $email = "Email not found";
+    }
 
 ?>
 <!DOCTYPE html>
@@ -63,7 +71,7 @@ $name = $_SESSION['username'];
 					<ul class="navbar-nav">
 						<li class="nav-item">
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">admin@gmail.com</a>
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><?php echo $email;?></a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="#">Profile</a></li>
 								<li><a class="dropdown-item" href="#">Settings</a></li>
@@ -89,7 +97,7 @@ $name = $_SESSION['username'];
 						<p>
 						<h1><b>0</b></h1>
 						</p>
-						<p><a href="#"><?php echo "Username: $name";?></a></p>
+						<p><a href="#">Full Details</a></p>
 					</div>
 				</div>
 			</div>

@@ -15,6 +15,7 @@ if (isset($_REQUEST['btn_login'])) {
         $result = mysqli_fetch_array($rs);
         $type = $result['user_type'];
         $_SESSION['username'] = $un;
+        $_SESSION['email'] = $email;
 
         if (strcmp($type, "admin") == 0) {
             header("Location: admin-dashboard.php");
