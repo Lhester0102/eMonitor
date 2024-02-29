@@ -45,6 +45,8 @@
 				<th><b>Item ID</b></th>
 				<th><b>Date Borrowed</b></th>
 				<th><b>Borrowed</b></th>
+				<th><b>Equipment Name</b></th>
+				<th><b>Useless</b></th>
 				<th colspan="2"><b>Action</b></th>
 			</tr>
 			</thead>
@@ -52,9 +54,11 @@
 			<?php
 				while($res=mysqli_fetch_array($rs))
 				{
-					echo"<td align='center'>".$res['item-code']."</td>";
-					echo"<td align='center'>".$res['borrow-date']."</td>";
+					echo"<td align='center'>".$res['item_code']."</td>";
+					echo"<td align='center'>".$res['borrow_date']."</td>";
 					echo"<td align='center'>".$res['borrower']."</td>";
+					echo"<td align='center'>".$res['equipment_name']."</td>";
+					echo"<td align='center'>".$res['useless']."</td>";
 					echo"<td  align='center'><a class='btn btn-sm btn-warning' href=''>Reset</a></td></tr>";
 				}
 			?>
