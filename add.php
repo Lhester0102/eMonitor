@@ -1,6 +1,7 @@
 
 
 <?php
+//wala
     include_once("config.php");
 
     if(isset($_POST['btn_submit'])) {
