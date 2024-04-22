@@ -1,7 +1,31 @@
 <?php
 	include_once("config.php");
-	$rs=mysqli_query($mysqli, "select * from  borrowed_item");
+	$searchTerm = "";
+
+    if(isset($_POST['search_btn'])) {
+        $searchTerm = mysqli_real_escape_string($mysqli, $_POST['search']);
+        $query = "SELECT * FROM borrowed_item WHERE item_code LIKE '%$searchTerm%' OR equipment_name LIKE '%$searchTerm%' OR borrow_date LIKE '%$searchTerm%' OR borrower LIKE '%$searchTerm%'";
+        $rs = mysqli_query($mysqli, $query);
+
+        if(!$rs) {
+            die("Error in SQL query: " . mysqli_error($mysqli));
+        }
+    } elseif(isset($_POST['search_reset'])) {
+        $searchTerm = "";
+        $rs = mysqli_query($mysqli, "SELECT * FROM borrowed_item");
+
+        if(!$rs) {
+            die("Error in SQL query: " . mysqli_error($mysqli));
+        }
+    } else {
+        $rs = mysqli_query($mysqli, "SELECT * FROM borrowed_item");
+
+        if(!$rs) {
+            die("Error in SQL query: " . mysqli_error($mysqli));
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -41,6 +65,19 @@
 		</div><br>
 		<table class="table table-striped w-75" border="1px" align="center">
 		<thead>
+    <tr>
+        <form method="POST" class="row g-3 align-items-center">
+            <th colspan="5">
+                <input align='center' type="text" style="width: 100%;" name="search" placeholder="Search" value="<?php echo $searchTerm; ?>" >
+            </th>
+            <th colspan="1.5">
+                <input class='btn btn-sm'  type="submit" value="Search" name="search_btn" style="width: 100%; height: 100%; background-color: green; color: white;">
+            </th>
+            <th colspan="1.5">
+                <input class='btn btn-sm'  type="submit" value="Reset" name="search_reset" style="width: 100%; height: 100%; background-color: gray; color: white;">
+            </th>
+        </form>
+    </tr>
 			<tr align="center">
 				<th><b>Item ID</b></th>
 				<th><b>Date Borrowed</b></th>
@@ -59,7 +96,7 @@
 					echo"<td align='center'>".$res['borrower']."</td>";
 					echo"<td align='center'>".$res['equipment_name']."</td>";
 					echo"<td align='center'>".$res['useless']."</td>";
-					echo"<td  align='center'><a class='btn btn-sm btn-warning' href=''>Reset</a></td></tr>";
+					echo"<td  align='center' colspan='2'><a class='btn btn-sm btn-warning' href=''>Reset</a></td></tr>";
 				}
 			?>
 			</tbody>

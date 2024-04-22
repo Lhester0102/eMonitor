@@ -2,9 +2,22 @@
 session_start();
 include_once("config.php");
 $name = $_SESSION['username'];
-	$rs=mysqli_query($mysqli, "select * from borrowed_item");
+$dep = $_SESSION['department'];
+$hier = $_SESSION['hierarchy'];
+	$rs = mysqli_query($mysqli, "SELECT * FROM borrowed_item WHERE item_type = 'non-consumable'");
 
+    $email_query = mysqli_query($mysqli, "SELECT * FROM account WHERE username = '$name'");
+	if($email_query) {
+        $row = mysqli_fetch_array($email_query);
+        $email = $row['email'];
+        $_SESSION['email'] = $email;
+    } else {
+        $email = "Email not found";
+    }
 
+        $image = empty($row['image']) ? "uploads/anonymous.png" : $row['image'];
+        $_SESSION['image'] = $image;
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,48 +56,25 @@ $name = $_SESSION['username'];
 	<body>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">DCCP</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-						<a class="nav-link" href="user_dashboard.php">Dashboard</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="Borrow_list.php">Borrowed Items</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="request_index.php">Request</a>
-					</li>
-			</ul>
-			<div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-			<ul class="navbar-nav">
-			<li class="nav-item">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">admin@gmail.com</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Profile</a></li>
-					<li><a class="dropdown-item" href="#">Settings</a></li>
-					<li><a class="dropdown-item" href="log-out.php">Sign Out</a></li>
-				</ul>
-				</li>
-			</li>
-		</ul>
-		</div>
-			</div>
-		</div>
-		</nav>
+		
+<?php include 'navigation_user.php'; ?>
+
 		<table class="table table-striped w-75" border="1px" align="center">
 			<thead >
 				<tr align="center" >
 					<th><b>ID</b></th>
 					<th><b>Equipment Name</b></th>
 					<th><b>Borrow Date</b></th>
-					<th><b>Action</b></th>
+                    <th><b>Return Date</b></th>
+					<th><b>Borrowed Amount</b></th>
+                <?php
+                if ($hier == 'Instructor') {
+
+                } else {
+                echo    '<th><b>Action</b></th>';
+                }
+                ?>
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -94,7 +84,13 @@ $name = $_SESSION['username'];
             echo "<tr align='center' ><td>" . $res['item_code'] . "</td>";
             echo "<td>" . $res['equipment_name'] . "</td>";
             echo "<td>" . $res['borrow_date'] . "</td>";
-            echo "<td><a class='btn btn-sm btn-warning' href=''>Return Item</a></td>";
+            echo "<td>" . $res['request_date'] . "</td>";
+            echo "<td>" . $res['borrowed_amount'] . "</td>";
+            if ($hier == 'Instructor') {
+            } else {
+            echo "<td><a class='btn btn-sm btn-warning' href='return_a_item.php?id=".$res['useless']."&iid=".$res['item_code']."&use=i'>Return Item</a></td>";
+            }
+            
         }
     }
 ?>

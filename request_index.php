@@ -1,11 +1,23 @@
+
 <?php
 session_start();
 include_once("config.php");
 $name = $_SESSION['username'];
-	$rs=mysqli_query($mysqli, "select * from inventory");
-	$rt=mysqli_query($mysqli, "select * from request");
+	$rs=mysqli_query($mysqli, "select * from inventory where quantity > 0");
+	$rt=mysqli_query($mysqli, "select * from request_to_ph");
 
+    $email_query = mysqli_query($mysqli, "SELECT * FROM account WHERE username = '$name'");
+	if($email_query) {
+        $row = mysqli_fetch_array($email_query);
+        $email = $row['email'];
+        $_SESSION['email'] = $email;
+    } else {
+        $email = "Email not found";
+    }
 
+        $image = empty($row['image']) ? "uploads/anonymous.png" : $row['image'];
+        $_SESSION['image'] = $image;
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,83 +56,71 @@ $name = $_SESSION['username'];
 	<body>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">DCCP</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-						<a class="nav-link" href="user_dashboard.php">Dashboard</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="Borrow_list.php">Borrowed Items</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="request_index.php">Request</a>
-					</li>
-			</ul>
-			<div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-			<ul class="navbar-nav">
-			<li class="nav-item">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">admin@gmail.com</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Profile</a></li>
-					<li><a class="dropdown-item" href="#">Settings</a></li>
-					<li><a class="dropdown-item" href="log-out.php">Sign Out</a></li>
-				</ul>
-				</li>
-			</li>
-		</ul>
-		</div>
-			</div>
-		</div>
-		</nav>
+		
+		<?php include 'navigation_user.php'; ?>
+
 		<table class="table table-striped w-75" border="1px" align="center">
 			<thead >
 				<tr align="center" >
-					<th><b>ID</b></th>
 					<th><b>Barode ID</b></th>
 					<th><b>Equipment Name</b></th>
 					<th><b>Equipment Brand</b></th>
 					<th><b>Available</b></th>
+					<th><b>Item Type</b></th>
+                    <th><b>Department</b></th>
 					<th colspan="2"><b>Action</b></th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php
+<?php
 while ($res = mysqli_fetch_array($rs)) {
-    // Assuming you have a query to fetch $ret based on $res['id']
-    $rt = mysqli_query($mysqli, "SELECT * FROM request WHERE id = " . $res['id']);
+
+    $rt = mysqli_query($mysqli, "SELECT * FROM request_to_ph WHERE id = " . $res['id']);
     
-    // Check if there are rows in $rt for the current $res['id']
     if ($ret = mysqli_fetch_array($rt)) {
         if ($ret['rname'] == $name) {
             echo "<tr align='center'>";
-            echo "<td>" . $res['id'] . "</td>";
             echo "<td>" . $res['item_code'] . "</td>";
             echo "<td>" . $res['equipment_name'] . "</td>";
             echo "<td>" . $res['equipment_brand'] . "</td>";
             echo "<td>" . $res['quantity'] . "</td>";
+            echo "<td>" . $res['item_type'] . "</td>";
+            echo "<td>" . $res['Locate'] . "</td>"; // Make sure 'dept' column is present in $res array
             echo "<td><a class='btn btn-sm btn-danger' href='request_item.php?id=" . $res['id'] . "&action=cancel'>Cancel Request</a></td>";
             echo "</tr>";
         }
-    } elseif ($res['request'] == 0) {
-        // Display only if there is no corresponding entry in $rt
+    } else {
         echo "<tr align='center'>";
-        echo "<td>" . $res['id'] . "</td>";
         echo "<td>" . $res['item_code'] . "</td>";
         echo "<td>" . $res['equipment_name'] . "</td>";
         echo "<td>" . $res['equipment_brand'] . "</td>";
         echo "<td>" . $res['quantity'] . "</td>";
-        echo "<td><a class='btn btn-sm btn-warning' href='request_item.php?id=" . $res['id'] . "&action=request'>Request Item</a></td>";
+        echo "<td>" . $res['item_type'] . "</td>";
+        echo "<td>" . $res['Locate'] . "</td>"; // Make sure 'dept' column is present in $res array
+        echo "<td><a class='btn btn-sm btn-warning' href='request_item_amout.php?id=" . $res['id'] . "&action=request&quantity=" . $res['quantity'] . "&user_type=user'>Request Item</a></td>";
         echo "</tr>";
     }
 }
 ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var quantity = <?php echo $quantity; ?>;
+        
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var requestAmount = parseInt(document.querySelector('input[name="requesta"]').value);
+            if (requestAmount > quantity) {
+                event.preventDefault();
+                alert('Error: Requested amount exceeds available quantity.');
+                var hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'btnSubmit';
+                hiddenInput.value = 'Request';
+                this.appendChild(hiddenInput);
+            }
+        });
+    });
+</script>
 
 
 			</tbody>

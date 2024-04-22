@@ -1,136 +1,194 @@
-
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Reports</title>
-	<style>
-		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-		.row.content {
-			height: 550px
-		}
-
-		/* Set gray background color and 100% height */
-		.sidenav {
-			background-color: #f1f1f1;
-			height: 100%;
-		}
-
-		/* On small screens, set height to 'auto' for the grid */
-		@media screen and (max-width: 767px) {
-			.row.content {
-				height: auto;
-			}
-		}
-	</style>
+    <title>Requests</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">DCCP</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="admin-dashboard.php">Dashboard</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="supply_officer.php">Supply Officers</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="instructor.php">Instructors</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="borrowed_items.php">Borrowed Items</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="index.php">Inventory</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="request.php">Requests</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="reports.php">Reports</a>
-					</li>
-				</ul>
-				<div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-					<ul class="navbar-nav">
-						<li class="nav-item">
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><?php session_start(); $email = $_SESSION['email']; echo $email;?></a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Profile</a></li>
-								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="log-out.php">Sign Out</a></li>
-							</ul>
-						</li>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
+    <?php 
+    session_start();
+    include_once("config.php");
+if (!isset($_SESSION['user_type']) || ($_SESSION['user_type'] !== "admin" && $_SESSION['user_type'] !== "supply_user")) {
+    header("Location: log-out.php");
+    exit();
+}
 
+    $searchTerm = "";
 
-	<table class="table table-striped" border="1px" align="center">
-    <thead>
-        <tr align="center">
-            <th><b>ID</b></th>
-            <th><b>Item Code</b></th>
-            <th><b>Equipment Name</b></th>
-            <th><b>Equipment Brand</b></th>
-            <th><b>Quantities</b></th>
-            <th><b>Requester</b></th>
-            <th><b>Actions</b></th>
-        </tr>
-    </thead>
-    <tbody>
+    if(isset($_POST['search_btn'])) {
+        $searchTerm = mysqli_real_escape_string($mysqli, $_POST['search']);
+        $query = "SELECT * FROM request WHERE rname LIKE '%$searchTerm%' OR request_no LIKE '%$searchTerm%' OR item_code LIKE '%$searchTerm%'";
+    } elseif(isset($_POST['search_reset'])) {
+        $query = "SELECT * FROM request";
+    } else {
+        $query = "SELECT * FROM request";
+    }
 
+    // Execute the query
+    $rs = mysqli_query($mysqli, $query);
 
+    if(!$rs) {
+        die("Error in SQL query: " . mysqli_error($mysqli));
+    }
+    ?>
+    
+    <?php include("navigations.php"); ?>
 
-<?php
-include_once("config.php");
-$rs = mysqli_query($mysqli, "SELECT * FROM inventory");
-while ($res = mysqli_fetch_array($rs)) {
-    if ($res['request'] == 1) {
-        echo "<tr> <td>" . $res['id'] . "</td>";
-        echo "<td>" . $res['item_code'] . "</td>";
-        echo "<td>" . $res['equipment_name'] . "</td>";
-        echo "<td>" . $res['equipment_brand'] . "</td>";
-        echo "<td>" . $res['quantity'] . "</td>";
-        $rt = mysqli_query($mysqli, "SELECT rname FROM request WHERE id = " . $res['id']);
-        if ($rt) {
-            if (mysqli_num_rows($rt) > 0) {
-                while ($ret = mysqli_fetch_array($rt)) {
-                    echo "<td>" . $ret['rname'] . "</td>";
+    
+
+    <div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Requests</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+            <div class="col-md-14 mb-3">
+                    <form method="POST" class="search-form row g-3 align-items-center">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="search" placeholder="Search" value="<?php echo $searchTerm; ?>">
+                        </div>
+                        <div class="col">
+                            <input class="btn btn-sm btn-success form-control" type="submit" value="Search" name="search_btn">
+                        </div>
+                        <div class="col">
+                            <input class="btn btn-sm btn-secondary form-control" type="submit" value="Reset" name="search_reset">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped" style="width: 100%;" border="1px" align="center">
+                        <thead>
+                            <tr align="center">
+                <th><b>Barcode</b></th>
+                <th><b>Equipment Name</b></th>
+                <th><b>Available Amount</b></th>
+                <th><b>Requester</b></th>
+                <th><b>Requested Amount</b></th>
+                <th><b>Requested Destination</b></th>
+                <th><b>Return Date</b></th>
+                <th><b>Reason</b></th>
+                <th colspan="2"><b>Actions</b></th>
+            </tr>
+
+            <?php
+            $totalRequest = 0;
+            if ($rs && mysqli_num_rows($rs) > 0) {
+                while ($res = mysqli_fetch_array($rs)) {
+                    echo "<tr>";
+                    echo "<td>{$res['item_code']}</td>";
+                    echo "<td>{$res['equipment_name']}</td>";
+                    echo "<td>{$res['quantity']}</td>";
+                    echo "<td>{$res['rname']}</td>";
+                    echo "<td>{$res['request_no']}</td>";
+                    echo "<td>{$res['request_destination']}</td>";
+                    echo "<td>";
+                    echo $res['return_date'] == '0000-00-00' ? "-" : $res['return_date'];
+                    echo "</td>";
+                    echo "<td>{$res['reason']}</td>";
+                    
+echo "<td><button class='btn btn-sm btn-success' onclick='openAcceptRequestModal({$res['id']})'>Accept Request</button></td>";
+
+echo "<td><button class='btn btn-sm btn-danger' onclick='openDenyRequestModal({$res['id']})'>Deny Request</button></td>";
+
+                    echo "</tr>";
+                    $totalRequest ++;
                 }
             } else {
-                echo "<td>No data found</td>";
+                echo "<tr align='center'><td colspan='10'><b>There are currently no requests <a href='request.php'>Refresh</b></td></tr>";
             }
-        } else {
-            echo "<td>Error: " . mysqli_error($mysqli) . "</td>";
-        }
-        $acceptURL = 'request_manage.php?id=' . $res['id'] . '&action=accept';
-        $denyURL = 'request_manage.php?id=' . $res['id'] . '&action=deny';
-        echo "<td><a class='btn btn-sm btn-warning' href='$acceptURL'>Accept Request</a></td>";
-        echo "<td><a class='btn btn-sm btn-danger' href='$denyURL'>Deny Request</a></td></tr>";
+echo "<tfoot><tr><td colspan='10' align='center'><b>Total Request: $totalRequest</b></td></tr></tfoot>";
+            ?>
+
+        </tbody>
+    </table>
+
+
+    <!-- Confirmation Modal for Accepting Request -->
+    <div class="modal fade" id="confirmAcceptModal" tabindex="-1" aria-labelledby="confirmAcceptModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmAcceptModalLabel">Confirm Acceptance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to accept the request?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <!-- Modify the Accept Request button to trigger the modal -->
+                    <button id="acceptRequestBtn" class="btn btn-success" onclick="acceptRequest()">Accept Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deny Request Modal -->
+    <div class="modal fade" id="denyRequestModal" tabindex="-1" aria-labelledby="denyRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="denyRequestModalLabel">Deny Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to deny the request?</p>
+                    <div class="mb-3">
+                        <label for="denyReason" class="form-label">Reason for Denial:</label>
+                        <textarea class="form-control" id="denyReason" name="denyReason" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="submitDenyRequest()">Deny Request</button>
+                    <input type="hidden" id="requestId" name="requestId" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function openAcceptRequestModal(requestId) {
+        $('#confirmAcceptModal').modal('show');
+        $('#acceptRequestBtn').off('click').on('click', function() {
+            acceptRequest(requestId);
+        });
     }
-}
-?>
+
+    function acceptRequest(requestId) {
+        var reason = prompt("Enter reason for acceptance:");
+        if (reason != null) {
+            var acceptUrl = 'request_manage.php?action=accept&id=' + requestId + '&reason=' + encodeURIComponent(reason);
+            window.location.href = acceptUrl;
+        }
+    }
+
+    function openDenyRequestModal(requestId) {
+        $('#requestId').val(requestId);
+        $('#denyRequestModal').modal('show');
+    }
+
+    function submitDenyRequest() {
+        var reason = $('#denyReason').val();
+        var requestId = $('#requestId').val();
+        if (reason) {
+            var denialUrl = 'request_manage.php?action=deny&id=' + requestId + '&reason=' + encodeURIComponent(reason);
+            window.location.href = denialUrl;
+        }
+    }
+
+    $(document).ready(function() {
+        $('#denyRequestBtn').click(submitDenyRequest);
+    });
+</script>
 
 
 
-
-
-    </tbody>
-</table>
-
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

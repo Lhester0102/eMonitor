@@ -1,28 +1,41 @@
-<?php
-	include_once("config.php");
-	if(isset($_POST['btn_submit']))
-	{
-		$i_code=$_POST['item_code'];
-		$e_name=$_POST['equipment_name'];
-		$e_brand=$_POST['equipment_brand'];
-		$e_model=$_POST['equipment_model'];
-		$e_type=$_POST['equipment_type'];
-		$quanty=$_POST['quantity'];
-		$item_type=$_POST['item_type'];
-		$rs=mysqli_query($mysqli,"Insert Into inventory(item_code, equipment_name, equipment_brand, equipment_model, equipment_type, quantity, item_type)values('$i_code','$e_name','$e_brand','$e_model','$e_type','$quanty','$item_type')");
-		if($rs)
-		{
-			echo'<script>alert("Record Save Successfully)</script>';
-			header("Location: index.php");
-		}
-		else
-		{
-			echo'<script>alert("Save Record Error")</script>';
-			header("Location: index.php");
-		}
-	}
 
+
+<?php
+    include_once("config.php");
+
+    if(isset($_POST['btn_submit'])) {
+        $e_name = $_POST['equipment_name'];
+        $e_brand = $_POST['equipment_brand'];
+        $e_model = $_POST['equipment_model'];
+        $quanty = $_POST['quantity'];
+        $item_type = $_POST['item_type'];
+        $locate = $_POST['department'];
+        $uploadDir = "inventory/";
+
+        if (isset($_FILES['user_image']) && $_FILES['user_image']['error'] === UPLOAD_ERR_OK) {
+            $image_name = $_FILES['user_image']['name'];
+            $image_tmp = $_FILES['user_image']['tmp_name'];
+            $image_path = $uploadDir . $image_name;
+
+            if (move_uploaded_file($image_tmp, $image_path)) {
+                $rs = mysqli_query($mysqli, "INSERT INTO inventory(equipment_name, equipment_brand, equipment_model, quantity, item_type, img, locate) VALUES ('$e_name', '$e_brand', '$e_model', '$quanty', '$item_type', '$image_path', '$locate')");
+
+                if($rs) {
+    $id = mysqli_insert_id($mysqli); // Fetch the inserted ID
+    header("Location: generator/generator2.php?id=" . $id . "&code=0");
+                    exit();
+                } else {
+                    $error_message = "Error: Save Record Error";
+                }
+            } else {
+                $error_message = "Error: Failed to upload image.";
+            }
+        } else {
+            $error_message = "Error: Please select an image to upload.";
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -101,16 +114,12 @@
 		<div class="sidebar">
 			<a href="index.php">Back</a>
 		</div>
-		<form method="post" action="#">
+		<form method="post" action="#" enctype="multipart/form-data">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
 						<div class="card shadow">
 							<form method="post" action="#">
-								<div class="mb-3">
-									<label for="item_code" class="form-label">Item Code:</label>
-									<input type="text" class="form-control" id="item_code" name="item_code" placeholder="Enter the item code" required>
-								</div>
 								<div class="mb-3">
 									<label for="equipment_name" class="form-label">Equipment Name:</label>
 									<input type="text" class="form-control" id="equipment_name" name="equipment_name" placeholder="Equipment name" required>
@@ -124,10 +133,6 @@
 									<input type="text" class="form-control" id="equipment_model" name="equipment_model" placeholder="Equipment model" required>
 								</div>
 								<div class="mb-3">
-									<label for="equipment_type" class="form-label">Equipment Type:</label>
-									<input type="text" class="form-control" id="equipment_type" name="equipment_type" placeholder="Enter the equipment type" required>
-								</div>
-								<div class="mb-3">
 									<label for="quantity" class="form-label">Quantity:</label>
 									<input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity" required>
 								</div>
@@ -137,7 +142,27 @@
         								<option value="consumable">Consumable</option>
         								<option value="non-consumable">Non-Consumable</option>
     								</select>
-								</div>
+								</div>                                
+	<div class="mb-3">
+        <label for="user_image" class="form-label">Item Image:</label>
+        <input type="file" class="form-control" id="user_image" name="user_image" accept="image/*" required>
+    </div>
+
+                            <div class="mb-3">
+                                <label for="department" class="form-label">Inventory Location:</label>
+                                <select name="department" class="form-control" required>
+                                    <option value="">-- choose inventory --</option>
+                                    <option value="BSBA">BSBA</option>
+                                    <option value="BSIT">BSIT</option>
+                                    <option value="BSCRIM">BSCRIM</option>
+                                    <option value="BEED">BEED</option>
+                                    <option value="BSHM">BSHM</option>
+                                    <option value="HCS">HCS</option>
+                                    <option value="SHS">SHS</option>
+                                    <option value="Supply Officer">Supply Officer</option>
+                                    <option value="Unspecified">Unspecified</option>
+                                </select>
+                            </div>
 								<div class="d-grid gap-2">
 									<button type="reset" class="btn btn-secondary">Reset</button>
 									<button type="submit" name="btn_submit" class="btn btn-primary">Save</button>

@@ -1,104 +1,111 @@
+<?php
+session_start();
+include_once("config.php");
+
+$name = $_SESSION['username'];
+$email_query = mysqli_query($mysqli, "SELECT * FROM account WHERE username = '$name'");
+$bor = mysqli_query($mysqli, "SELECT * FROM inventory WHERE item_type = 'non-consumable'");
+$nbor = mysqli_num_rows($bor);
+$con = mysqli_query($mysqli, "SELECT * FROM inventory WHERE item_type = 'consumable'");
+$ncon = mysqli_num_rows($con); // Corrected variable name from $bor to $con
+$req = mysqli_query($mysqli, "SELECT * FROM request WHERE rname = '$name'");
+
+$numItems = 0;
+$totalBorrowedAmount = 0;
+$totalConsumeAmount = 0;
+$email = $_SESSION['email'];
+$image_path = $_SESSION['image_path'];
+$position = $_SESSION['position'];
+$department = $_SESSION['department'];
+$iid = $_SESSION['iid'];
+$iid_image = $_SESSION['iid_image'];
+
+
+if ($req) {
+    $numItems = mysqli_num_rows($req);
+}
+
+if ($email_query) {
+    $row = mysqli_fetch_array($email_query);
+    if ($row !== null) {
+        $email = $row['email'];
+    }
+}
+
+$_SESSION['email'] = $email;
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>User Dashboard</title>
-	<style>
-		/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-		.row.content {
-			height: 550px
-		}
+    <title>User Dashboard</title>
+    <style>
+        .row.content {
+            height: 550px
+        }
 
-		/* Set gray background color and 100% height */
-		.sidenav {
-			background-color: #f1f1f1;
-			height: 100%;
-		}
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
 
-		/* On small screens, set height to 'auto' for the grid */
-		@media screen and (max-width: 767px) {
-			.row.content {
-				height: auto;
-			}
-		}
-	</style>
+        @media screen and (max-width: 767px) {
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">DCCP</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" href="supply_user_dashboard.php">Dashboard</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href=" ">???</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href=" ">???</a>
-					</li>
-					<!-- <li class="nav-item dropdown" stylesheet="float:right">
-				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Link</a></li>
-					<li><a class="dropdown-item" href="#">Another link</a></li>
-					<li><a class="dropdown-item" href="#">A third link</a></li>
-				</ul>
-				</li> -->
-				</ul>
-				<div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-					<ul class="navbar-nav">
-						<li class="nav-item">
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">admin@gmail.com</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Profile</a></li>
-								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="log-in.php">Sign Out</a></li>
-							</ul>
-						</li>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-	<div class="col-sm-12" style="text-align:center;color:black">
-		<div class="well ms-5 me-5 mt-2" style="text-align:center;background:blue;color:white">
-			<h1>User Dashboard</h1>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="well">
-					<div class="card ms-5 me-5 mt-3 p-3">
-						<h1>???</h1>
-						<p>
-						<h1><b>0</b></h1>
-						</p>
-						<p><a href="#">Full Details</a></p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="well">
-					<div class="card ms-5 me-5 mt-3 p-3">
-						<h1>???</h1>
-						<p>
-						<h1><b>0</b></h1>
-						</p>
-						<p><a href="#">Full Details</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <?php include 'navigation_supply_user.php'; ?>
+
+    <div class="col-sm-12" style="text-align:center;color:black">
+        <div class="well ms-5 me-5 mt-2" style="text-align:center;background:blue;color:white">
+            <h1>Supply Officer Dashboard</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well">
+                    <div class="card ms-5 me-5 mt-3 p-3">
+                        <h1>Consumable</h1>
+                        <p>
+                            <h1><b><?php echo $ncon ?></b></h1>
+                        </p>
+                        <p><a href="conusmable.php">Full Details</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="well">
+                    <div class="card ms-5 me-5 mt-3 p-3">
+                        <h1>PENDING REQUEST</h1>
+                        <p>
+                            <h1><b><?php echo $numItems; ?></b></h1>
+                        </p>
+                        <p><a href="request_index.php">Full Details</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="well">
+                    <div class="card ms-5 me-5 mt-3 p-3">
+                        <h1>Non-Consumable</h1>
+                        <p>
+                            <h1><b><?php echo $nbor ?></b></h1>
+                        </p>
+                        <p><a href="non_conusmable.php">Full Details</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

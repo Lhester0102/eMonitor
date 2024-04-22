@@ -9,6 +9,7 @@
 	$quantity="";
     $borrow_no="";
     $item_type="";
+    $img = "";
 	$rs=mysqli_query($mysqli,"select * from inventory where id=$id");
 	if($result=mysqli_fetch_array($rs))
 	{
@@ -16,10 +17,9 @@
 		$equipName=$result["equipment_name"];
 		$equipBrand=$result["equipment_brand"];
 		$equipModel=$result["equipment_model"];
-		$equipType=$result["equipment_type"];
 		$quantity=$result["quantity"];
-        $borrow_no=$result["borrow_no"];
         $item_type=$result["item_type"];
+        $img = $result["img"];
 	}
 ?>
 <!DOCTYPE html>
@@ -108,6 +108,16 @@
             background-color: #1d6193;
         }
 
+        input[type="button"] {
+            width: 100%;
+            background-color: white;
+            color: black;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
 		</style>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -116,7 +126,7 @@
 		<div class="sidebar">
 			<a href="index.php">Back</a>
 		</div>
-		<form method="post" action="update_inventory.php">
+		<form method="post" action="update_inventory.php" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>ID:</td>
@@ -124,8 +134,8 @@
                 <td><?php echo $id ?></td>
             </tr>
             <tr>
-                <td>Item Code:</td>
-                <td><input type="text" name="update_itemCode" value="<?php echo $itemCode; ?>" placeholder="Enter the item code" required></td>
+                <td>Barcode:</td>
+                <td><a href="generator/generator2.php?id=<?php echo $id; ?>&code=<?php echo $itemCode; ?>"><input type="button" name="update_itemCode" value="<?php echo $itemCode; ?>" ></a></td>
             </tr>
             <tr>
                 <td>Equipment Name:</td>
@@ -140,16 +150,8 @@
                 <td><input type="text" name="update_equipModel" value="<?php echo $equipModel; ?>" placeholder="Equipment model" required></td>
             </tr>
             <tr>
-                <td>Equipment Type:</td>
-                <td><input type="text" name="update_equipType" value="<?php echo $equipType; ?>" placeholder="Enter the equipment type" required></td>
-            </tr>
-            <tr>
                 <td>Avilable No.:</td>
                 <td><input type="number" name="update_quantity" value="<?php echo $quantity; ?>" placeholder="Quantity" required></td>
-            </tr>
-            <tr>
-                <td>Borrowed No.:</td>
-                <td><input type="number" name="update_borrow_no" value="<?php echo $borrow_no; ?>" placeholder="Quantity" required></td>
             </tr>
             <tr>
             <tr>
@@ -160,8 +162,32 @@
                     <option value="non-consumable" <?php echo ($item_type === 'non-consumable') ? 'selected' : ''; ?>>Non-Consumable</option>
                     </select>
                 </td>
-
             </tr>
+
+<tr>
+    <td>Item Image:</td>
+    <td>
+        <input type="file" class="form-control" id="img" name="img" accept="image/*">
+    </td>
+</tr>
+
+                            <dtr>
+                                <td for="locate" class="form-label">Inventory Location:</td>
+                                <td>
+                                <select name="locate" class="form-control">
+                                    <option value="">-- choose inventory --</option>
+                                    <option value="BSBA">BSBA</option>
+                                    <option value="BSIT">BSIT</option>
+                                    <option value="BSCRIM">BSCRIM</option>
+                                    <option value="BEED">BEED</option>
+                                    <option value="BSHM">BSHM</option>
+                                    <option value="HCS">HCS</option>
+                                    <option value="SHS">SHS</option>
+                                    <option value="Supply Officer">Supply Officer</option>
+                                    <option value="Unspecified">Unspecified</option>
+                                </select>
+                                </td>
+                            </tr>
             <tr>
                 <td align="center" colspan="2"><input type="submit" name="btnSubmit" value="UPDATE"></td>
             </tr>

@@ -106,22 +106,26 @@
                         background-color: #1d6193;
                     }
 
+                    .buttones {
+                        width: 50px;
+                        height: 20px;
+                    }
+                    
+    .blue-button {
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
         </style>
         <script type="text/javascript">
-            
-        /*function scanBarcode() {
-            var barcode = document.getElementById('barcode').value;
-            // You can use AJAX to send the barcode to the server and fetch the product name
-            // Here, for demonstration, we'll just redirect to a new page with the barcode
-            window.location.href = "index.php?barcode=" + barcode;
-        } */
-
         document.addEventListener('DOMContentLoaded', function() {
-        // Add event listener to barcode input field
         document.getElementById('barcode').addEventListener('input', function(event) {
             var barcode = event.target.value.trim();
             if (barcode !== '') {
-                // Submit the form when barcode is scanned
                 document.getElementById('barcodeForm').submit();
             }
         });
@@ -129,36 +133,30 @@
 
     </script>
     </head>
-    <body>
+<body>
     <div class="sidebar">
-			<a href="index.php">Back</a>
-		</div>
+        <a href="index.php">Back</a>
+    </div>
     <div class="container">
         <h2>Barcode Scanner</h2>
-        <form>
+        <form method="GET">
             <label for="barcode">Barcode:</label>
             <input type="text" id="barcode" name="barcode" required>
-            <input type="button" value="Scan" onclick="scanBarcode()">
+            <input type="submit" value="Scan" onclick="scanBarcode()" class="blue-button">
         </form>
-
         <?php
             include_once("config.php");
-
-            // Check if barcode is provided in the URL
             if(isset($_GET['barcode'])) {
                 $barcode = $_GET['barcode'];
-
-                // Query the database to find the product with the given barcode
                 $sql = "SELECT * FROM inventory WHERE item_code = '$barcode'";
                 $result = $mysqli->query($sql);
-
                 if ($result->num_rows > 0) {
                     $product = $result->fetch_assoc();
         ?>
-
         <div class="product-info">
             <h2>Product Information</h2>
-            <div>
+            <div align="center">
+                <img class='myImg' src='barcode/<?php echo $product['item_code']; ?>.png' alt='<?php echo $product['item_code']; ?>' style='height: 40px; border: 2px solid #000;'> <br><br>
                 <label>Name:</label>
                 <input type="text" value="<?php echo $product['equipment_name']; ?>" readonly><br><br>
                 <label>Brand:</label>
@@ -166,7 +164,7 @@
                 <label>Model:</label>
                 <input type="text" value="<?php echo $product['equipment_model']; ?>" readonly><br><br>
                 <label>Type:</label>
-                <input type="text" value="<?php echo $product['equipment_type']; ?>" readonly><br><br>
+                <input type="text" value="<?php echo $product['item_type']; ?>" readonly><br><br>
                 <label>Quantity:</label>
                 <input type="text" value="<?php echo $product['quantity']; ?>" readonly><br><br>
                 <label>Barcode:</label>
@@ -180,5 +178,14 @@
             }
         ?>
     </div>
-    </body>
+    <script>
+        function scanBarcode() {
+            var barcode = document.getElementById("barcode").value;
+            window.location.href = "your_page.php?barcode=" + barcode;
+        }
+    </script>
+</body>
+
 </html>
+
+
