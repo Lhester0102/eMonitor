@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 03:05 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Apr 24, 2024 at 07:14 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `accept` (
   `amount` int(11) NOT NULL,
   `type` text NOT NULL,
   `reason` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accept`
@@ -76,37 +76,41 @@ CREATE TABLE `account` (
   `image_path` varchar(255) NOT NULL,
   `iid` text NOT NULL,
   `iid_image` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `account`
 --
 
 INSERT INTO `account` (`UID`, `username`, `password`, `email`, `department`, `position`, `user_type`, `image_path`, `iid`, `iid_image`) VALUES
-(16, 'supply', '$2y$10$8ZeNHEB/NDjadtyYLU7OQeZmtqk2upfkMzCcTQ3BbTjcPSfLvzZF.', 'supply', '', 'new', 'supply_user', 'uploads/3.png', '10 14 01', 'id/5.png'),
-(19, 'user', '$2y$10$oBKxMyk7SHWbh.cqLG.Nyu6gg4UWfh8oPY3sH80GJANbq.GHFeLpi', 'user', 'BSIT', 'new', 'user', 'uploads/432934309_391714240329971_74603740169139332_n.jpg', '10 14 01', 'id/432934309_391714240329971_74603740169139332_n.jpg'),
+(16, 'General Merchandise', '$2y$10$yOCaEH81xKRa14fhR7CjleNo5NXGgfwRHmbvJ0SV6WXdnbptwME0q', 'General Merchandise', 'General Merchandise', 'General Merchandise', 'admin', 'uploads/3.png', '10 14 01', 'id/5.png'),
 (20, 'admin', '$2y$10$yOCaEH81xKRa14fhR7CjleNo5NXGgfwRHmbvJ0SV6WXdnbptwME0q', 'admin', '', '', 'admin', '', '', ''),
 (22, 'ss', '$5$rounds=5000$5/FZ/SrgjpaGNu5r$gf9u2dKfaErgrQRFez.5x40/yb6KLLW55rwYEG4ArX6', 'ss', '', '', 'supply_user', '', '', ''),
 (33, 'karl', '$2y$10$prKXQ4.B0cHBmbYzocVrUObtYO/o7k1bioE7I57bRsdpfquTWXr1m', 'karlpagdilao14@gmail.com', '', '', 'supply_user', 'uploads/IMG_1906.JPG', '', ''),
-(34, 'karl1', '$2y$10$HPgw5vwZWb/z11vc3j6Ep.JjC1MdpBUL4rUfCqAq4G9sdFZ076XI6', 'karlpagdilao14@gmail.com', 'BSIT', '', 'user', 'uploads/IMG_1907.JPG', '', ''),
-(35, '2', '$2y$10$y.xMPcZRc9jgiY3vP0AuUOQvVXzzSQeATlVdhS/xtrNeXyai9g1eu', 'password1@gmail.com', 'BSBA', 'elijah', 'user', 'uploads/368091901_663299042322666_5156241491238501512_n.jpg', '', ''),
-(36, 'users', '$2y$10$r9zkGnIQDEmI/obIBTViNe4BVF7nekl7OtY4wjGMJrA3cFEJtogiu', 'user@gmail.com', 'BSIT', '', 'user', 'uploads/modern-blue-orange-yellow-abstract-3d-geometric-presentation-background_249611-566.jpg', '', ''),
 (42, 'Lhester', '$2y$10$m492nJLauR9VAm2SvYdgOewyjIjWLaCNXGyOD65I8Kf0mY/5/haO2', 'lhester@gmail.com', '', '', 'supply_user', 'uploads/WIN_20240305_10_47_05_Pro.jpg', '', ''),
 (43, 'lhester12', '$2y$10$O.ptKpUW0eWtNVyHdrBkUOVdQBss57kSk53MGaLsZvHxEswP6uSV2', 'lhester123@gmail.com', '', '', 'supply_user', 'uploads/WIN_20240305_10_47_05_Pro.jpg', '', ''),
 (46, 'christopher', '$2y$10$etMU/oeGqishe6bR38gGEegE4P0aUq9CQLmd/0hIaPmgxxFfw3doS', 'christopheradolfoacoba@gmail.com', '', '', 'supply_user', 'uploads/1710753050733.jpg', '', ''),
-(47, 'dd111@gmail.com', '$2y$10$0l8IYLq44w/UyZsN/lvtHOEDDhOFKJQ7hkFcI0g1rg37OXYVARu/W', 'dd111@gmail.com', 'BSCRIM', '', 'user', 'uploads/3671229.png', '', ''),
-(48, 'dd111@gmail.com', '$2y$10$AKTldeOo7Yw7bJV6ucwZ1u0Z1pXjsPEAIQ05Znm/r5emx8PLsgWOa', 'dd111@gmail.com', 'BSEDUC', '', 'user', 'uploads/programmer.png', '', ''),
 (49, 'jessa', '$2y$10$urkKarEJA24n7ohIp9mSwOp9eTCd4sC63os8mxCBJNexiPkYM8BUC', 'jessa@gmail.com', '', '', 'supply_user', 'uploads/programmer.png', '', ''),
-(50, 'jessaa', '$2y$10$zEjmoGdTY5tXtYg88D2XuutEBui.JB8gY47RWkEPkODvIufRnNxWi', 'jessaa@gmail.com', '', '', 'user', 'uploads/supply_officer-icon.png', '', ''),
 (52, '1234124', '$2y$10$kMTNyQUyYM3g2MjdN5LEsOffUUe.bjyVPI6LrGhK/d0q8irQmEi3q', 'user@gmail.com', '', 'pos', 'supply_user', 'uploads/370231291_295609796656099_7324808414139182706_n.jpg', '', ''),
 (56, 'asd', '$2y$10$BRQfggJQlZGu.44mhelXdOieIHTx1EVyxC/77rKEmlM6WhxfBC2qS', 'asd@gmail.com', '', '', 'supply_user', 'uploads/WIN_20240305_10_47_05_Pro.jpg', '', ''),
-(58, 'shshshshshshs', '$2y$10$DZbLLY5JP5GbpexpEqbF7eXkTM/.GcYQZwhueTILnD7cnqAIjZ8ai', 'shshshshshshs@gmail.com', 'SHS', 'shshshshshshs', 'user', 'uploads/images (1).jpg', '12312124', 'id/images (1).jpg'),
-(59, 'bcriminale', '$2y$10$rD85vNFxQiuqMluFGvObHulVtCaz5.sBt1lN6oQkeD1jKNV4ly9sa', 'user@gmail.com', 'BSCRIM', 'Program Head', 'supply_user', 'uploads/images (1).jpg', '12312124', 'id/images (1).jpg'),
-(60, 'bsit000110001', '$2y$10$H.iTppe0ff8UQVLaheOKLeqdJt.xk3xV0tlq5vXYMK1oNexGy88iC', 'user@gmail.com', 'BSIT', 'Program Head', 'supply_user', 'uploads/b90b42869d60cd52c1949096dfd93c04b977ed55r1-750-1034v2_hq.jpg', '12312124', 'id/b90b42869d60cd52c1949096dfd93c04b977ed55r1-750-1034v2_hq.jpg'),
-(61, 'beeducation', '$2y$10$Wsf9V5oZv6CXPOdNbaqnO.PD0z1hR8G5wyq1/2mCiXE6gXHyN9oy.', 'user@gmail.com', 'BEED', 'Program Head', 'supply_user', 'uploads/ehrrdfhqe6231.jpg', '12312124', 'id/ehrrdfhqe6231.jpg'),
 (12345, 'Computer Technician', '$2y$10$8ZeNHEB/NDjadtyYLU7OQeZmtqk2upfkMzCcTQ3BbTjcPSfLvzZF.', 'Computer Technician', 'supply officer', 'Computer Technician', 'admin', '', '12345', ''),
 (123456, 'Supply Officer', '$2y$10$8ZeNHEB/NDjadtyYLU7OQeZmtqk2upfkMzCcTQ3BbTjcPSfLvzZF.', 'Supply Officer', 'supply officer', 'Supply Officer', 'admin', '', '123456', ''),
-(1234567, 'General Merchandise', '$2y$10$8ZeNHEB/NDjadtyYLU7OQeZmtqk2upfkMzCcTQ3BbTjcPSfLvzZF.', 'General Merchandise', 'supply officer', 'General Merchandise', 'admin', '', '1234567', '');
+(1234567, 'General Merchandise', '$2y$10$8ZeNHEB/NDjadtyYLU7OQeZmtqk2upfkMzCcTQ3BbTjcPSfLvzZF.', 'General Merchandise', 'supply officer', 'General Merchandise', 'admin', '', '1234567', ''),
+(1234568, 'bsit', '$2y$10$m0ttkwpdUmk..jXyaaEuxuMfBmxGy/nc1402OCseKSgefuW0zVuk.', 'dccpbsit@gmail.com', 'BSIT', 'Instructor', 'user', 'uploads/128-1280593_computer-user-icon-img-users.png', '25015795', 'id/ID3.png'),
+(1234569, 'bsba', '$2y$10$iiEKaZnK6AnOwHYfVtnxGuTSHCeGxpxEWF5tOV9D65tmfsRPQqp0K', 'dccpbsba@gmail.com', 'BSBA', 'Instructor', 'user', 'uploads/user-icon-vector-260nw-393536320.png', '32015484', 'id/ID1.png'),
+(1234570, 'bscrim', '$2y$10$vq7Fo3glC.Nv.4DfuKC0weUiKcYvYDZbz5vnTbfAdw36ca0tf7Ev6', 'dccpbscrim@gmail.com', 'BSCRIM', 'Instructor', 'user', 'uploads/images (1).png', '10246210', 'id/ID2.png'),
+(1234571, 'beed', '$2y$10$JwRlw1J9ttGfT3.CibAIYO44h3RNlBsDHVVYDpz1aUXEBNn009gFa', 'dccpbeed@gmail.com', 'BEED', 'Instructor', 'user', 'uploads/c0d49403.png', '26487019', 'id/ID4.png'),
+(1234572, 'hcs', '$2y$10$p.vDGRmCb0MxgcXwK5zr6eaIpvuG1v7bAmnp4YrzfjC7/qdco9mnq', 'dccphcs@gmail.com', 'HCS', 'Instructor', 'user', 'uploads/download.png', '87031564', 'id/ID6.png'),
+(1234573, 'bshm', '$2y$10$4fP7NZgRAb.yI6ehPeUos.MAW0ZDlrNYDlXrXFLNGj32lVzeZ7Cjy', 'dccpbshm@gmail.com', 'BSHM', 'Instructor', 'user', 'uploads/chef-avatar-icon-vector-32077717.png', '10432651', 'id/ID5.png'),
+(1234574, 'shs', '$2y$10$kpD7xKKxEqg37UGTUCrhv.Jzclleo5N.irwCTpC00BYckn6GwHS2e', 'dccpshs@gmail.com', 'SHS', 'Instructor', 'user', 'uploads/images.png', '50431672', 'id/ID7.png'),
+(1234575, 'paragua', '$2y$10$W6Xn2QTq9D7bhZ.mjRrWeegaUIMU5wYT5xISZ5mqRxej6qZE.CVkK', 'bsbaprogramhead@gmaill.com', 'BSBA', 'Program Head', 'supply_user', 'uploads/bsba.png', '20154301', 'id/ID6.png'),
+(1234576, 'mariano', '$2y$10$kD.E0VN9WldUBsgsdSAfe.8CeQMzA41irgjlqzb/aWWXiD7b4JOXW', 'bsitprogramhead@gmail.com', 'BSIT', 'Program Head', 'supply_user', 'uploads/bsit.png', '20135461', 'id/ID3.png'),
+(1234577, 'estrada', '$2y$10$GpIygN62ihgk1IA16AHEweoe8zUZHm9dt.AZmN567FkJRWdRzlwKa', 'bscrimprogramhead@gmail.com', 'BSCrim', 'Program Head', 'supply_user', 'uploads/bscrim.png', '32012451', 'id/ID2.png'),
+(1234578, 'elmore', '$2y$10$pmK0mM1Tct0NxR.YV1ZvSeLWJK8QiXkLg6Izke/RKfSRves2T6hGS', 'hcsprogramhead@gmail.com', 'HCS', 'Program Head', 'supply_user', 'uploads/hcs.png', '54032151', 'id/ID5.png'),
+(1234579, 'elmore', '$2y$10$NYqJENniG65NKdxoZ1emWelbfE/jHK9w1gqF7uPFlx4PrsnsHD6Oy', 'beedprogramhead@gmail.com', 'BEED', 'Program Head', 'supply_user', 'uploads/beed.png', '23015441', 'id/ID4.png'),
+(1234580, 'al', '$2y$10$ZHJqS98OiHPC3NYPvPG9RO7.cRzZel5RUzmFizTz.xyqUSbPyyrj6', 'bshmprogramhead@gmail.com', 'BSHM', 'Program Head', 'supply_user', 'uploads/bshm.png', '51123004', 'id/ID7.png'),
+(1234581, 'jakammo', '$2y$10$sWze4XhmsmKo6GcQK.6RIeVLTkU.jRdg7TtuxbvYQzxIo/ga8Fn9W', 'shsprogramhead@gmail.com', 'SHS', 'Program Head', 'supply_user', 'uploads/shs.png', '72422103', 'id/ID1.png'),
+(1234582, 'jessa mae cabaloan', '$2y$10$Ptir..HiwprxXeVPll1yVu8iDBubv2gkgoz.Cdr1RvQGHixSbcEbK', 'jessamaecabaloan11@gmail.com', 'HCS', 'Program Head', 'supply_user', 'uploads/images (2).jpg', '11119999', 'id/2b98cf15a65e126fb433ae02508c81f3_large.png');
 
 -- --------------------------------------------------------
 
@@ -126,7 +130,7 @@ CREATE TABLE `archive_inventory` (
   `img` varchar(255) NOT NULL,
   `aid` int(11) NOT NULL,
   `Locate` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `archive_inventory`
@@ -142,7 +146,34 @@ INSERT INTO `archive_inventory` (`id`, `item_code`, `equipment_name`, `equipment
 (15, '777', '777', '777', '777', '', 728, 'consumable', 'uploads/tumblr_ea2b1b3e757dd5efd67a3ff148c3b073_0a3dd22a_1280.gif', 10, ''),
 (48, '', 'name', 'brand', 'model', '', 123, 'non-consumable', 'inventory/acer (1).png', 13, ''),
 (47, '', '1241424124124', '1241424124124', '1241424124124', '', 2147483647, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', 14, ''),
-(46, '', '11111111111111111', '11111111111111111', '11111111111111111', '', 2147483647, 'non-consumable', 'inventory/acer.png', 15, '');
+(46, '', '11111111111111111', '11111111111111111', '11111111111111111', '', 2147483647, 'non-consumable', 'inventory/acer.png', 15, ''),
+(50, '', 'Projector', 'Epson', '135409785420', '', 5, 'non-consumable', 'inventory/projector.jpg', 17, 'BSIT'),
+(51, '', 'Projector', 'Epson', '135409785420', '', 5, 'non-consumable', 'inventory/projector.jpg', 18, 'BSIT'),
+(49, 'bsit', 'name bsit', 'brand bsit', 'model bsit', '', 123, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', 19, 'BSIT'),
+(45, 'acer', 'acer', 'acer', 'acer', '', 123, 'non-consumable', 'inventory/419546073_856976492819303_895761370860930558_n.jpg', 20, 'BSIT'),
+(43, 'user-12345', 'user-12345', 'user-12345', 'user-12345', '', 12345, 'non-consumable', 'inventory/images.jpg', 21, 'BSHM'),
+(11, '2143152', 'iPhone 15 Pro Max', 'Apple', '234523', '', 788, 'consumable', 'uploads/purepng.com-wifi-icon-blackwifi-iconwifiiconwireless-connection-17015284361412yp74.png', 22, 'Unspecified'),
+(42, '123456789987654321', 'qwerqwer', 'qwrqwr', 'qwrwqr', '', 2147483647, 'non-consumable', 'inventory/2143152.png', 23, 'SHS'),
+(44, 'acer', 'acer', 'acer', 'acer', '', 12, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', 24, ''),
+(41, '98765', '98765', '98765', '98765', '', 98765, 'non-consumable', 'inventory/5da24471b8efc956c516b86d4a571e1d.jpg', 25, 'SHS'),
+(12, '34a', '33', '3', '3', '', 45, 'consumable', 'uploads/supply_officer-icon.png', 26, 'BSCRIM'),
+(14, '777', '777', '777', '777', '', 635, 'non-consumable', '', 27, 'BSCRIM'),
+(16, '990908', 'ytr765hgj', 'hjgi776', 'kfgi765', '', 12285, 'non-consumable', '', 28, 'BSBS'),
+(21, '1214462452', 'Laptop', 'Samsung', 'ase353adf', '', 0, 'consumable', '', 29, 'BSHM'),
+(27, '7636490063435', 'HDD', 'SEAGATE', '320ADG', '', 80, 'consumable', '', 31, 'Supply Officer'),
+(28, '863320063528200', 'Realme', 'Realme', '3254352', '', 2, 'non-consumable', '', 32, 'Supply Officer'),
+(29, 'ABCD', 'abcd', 'efgh', 'EFGH', '', 12330, 'consumable', '', 33, 'Supply Officer'),
+(31, '883412740890', 'Nike Air Force One', 'Nike', '1242425', '', 0, 'non-consumable', '', 34, 'Supply Officer'),
+(32, '4902505088933', 'marker', 'pilot', 'N/A', '', 4, 'consumable', '', 35, ''),
+(33, '789456', 'Monitor', 'Acer', 'ASFT451', '', 1, 'non-consumable', '', 36, ''),
+(34, '0101132401', 'Marker - Pilot', 'HVW', '00000001', '', 9, 'consumable', '', 37, ''),
+(35, '1234567890', '1234567890', '1234567890', '1234567890', '', 1234567876, 'non-consumable', '', 38, ''),
+(36, '8994993002672', 'Garnier', 'Garnier', 'Yogurt Sleeping Mask', '', 6784, 'consumable', '', 39, ''),
+(37, 'bb', 'bb', 'bb', 'bb', '', 33, 'non-consumable', 'inventory/1710753050733.jpg', 40, ''),
+(38, '1234124', 'user-12345', '1', '123', '', 2134124, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', 41, 'Unspecified'),
+(39, '12', '12', '12', '12', '', 12, 'non-consumable', 'inventory/5da24471b8efc956c516b86d4a571e1d.jpg', 42, 'BSHM'),
+(40, '1234124', 'user-12345', 'user@gmail.com', '123', '', 123, 'non-consumable', 'inventory/5da24471b8efc956c516b86d4a571e1d.jpg', 43, 'HCS'),
+(56, '', '123', '12311', '1234', '', 123, 'non-consumable', 'inventory/oishi-rinbee-cheese-sticks-85g_2.jpg', 44, 'Supply Officer');
 
 -- --------------------------------------------------------
 
@@ -158,7 +189,7 @@ CREATE TABLE `archive_merch` (
   `quantity` text NOT NULL,
   `measurement` text NOT NULL,
   `image` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `archive_merch`
@@ -185,14 +216,24 @@ CREATE TABLE `archive_user` (
   `image_path` text NOT NULL,
   `iid` text NOT NULL,
   `iid_image` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `archive_user`
 --
 
 INSERT INTO `archive_user` (`eid`, `username`, `password`, `email`, `department`, `position`, `user_type`, `image_path`, `iid`, `iid_image`) VALUES
-(4, '1234124', '$2y$10$fEei0rw3p5Sxfo3wul2WBuPQP0TKZ1yXgWff3RSVQRYGHd4GMze7q', 'user@gmail.com', '', 'new', 'supply_user', 'uploads/378135593_698875024909345_835143336972800485_n.jpg', '', '');
+(4, '1234124', '$2y$10$fEei0rw3p5Sxfo3wul2WBuPQP0TKZ1yXgWff3RSVQRYGHd4GMze7q', 'user@gmail.com', '', 'new', 'supply_user', 'uploads/378135593_698875024909345_835143336972800485_n.jpg', '', ''),
+(5, 'user', '$2y$10$oBKxMyk7SHWbh.cqLG.Nyu6gg4UWfh8oPY3sH80GJANbq.GHFeLpi', 'user', 'BSIT', 'new', 'user', 'uploads/432934309_391714240329971_74603740169139332_n.jpg', '10 14 01', 'id/432934309_391714240329971_74603740169139332_n.jpg'),
+(7, '2', '$2y$10$y.xMPcZRc9jgiY3vP0AuUOQvVXzzSQeATlVdhS/xtrNeXyai9g1eu', 'password1@gmail.com', 'BSBA', 'elijah', 'user', 'uploads/368091901_663299042322666_5156241491238501512_n.jpg', '', ''),
+(8, 'users', '$2y$10$r9zkGnIQDEmI/obIBTViNe4BVF7nekl7OtY4wjGMJrA3cFEJtogiu', 'user@gmail.com', 'BSIT', '', 'user', 'uploads/modern-blue-orange-yellow-abstract-3d-geometric-presentation-background_249611-566.jpg', '', ''),
+(9, 'dd111@gmail.com', '$2y$10$0l8IYLq44w/UyZsN/lvtHOEDDhOFKJQ7hkFcI0g1rg37OXYVARu/W', 'dd111@gmail.com', 'BSCRIM', '', 'user', 'uploads/3671229.png', '', ''),
+(10, 'dd111@gmail.com', '$2y$10$AKTldeOo7Yw7bJV6ucwZ1u0Z1pXjsPEAIQ05Znm/r5emx8PLsgWOa', 'dd111@gmail.com', 'BSEDUC', '', 'user', 'uploads/programmer.png', '', ''),
+(11, 'jessaa', '$2y$10$zEjmoGdTY5tXtYg88D2XuutEBui.JB8gY47RWkEPkODvIufRnNxWi', 'jessaa@gmail.com', '', '', 'user', 'uploads/supply_officer-icon.png', '', ''),
+(12, 'shshshshshshs', '$2y$10$DZbLLY5JP5GbpexpEqbF7eXkTM/.GcYQZwhueTILnD7cnqAIjZ8ai', 'shshshshshshs@gmail.com', 'SHS', 'shshshshshshs', 'user', 'uploads/images (1).jpg', '12312124', 'id/images (1).jpg'),
+(13, 'beeducation', '$2y$10$Wsf9V5oZv6CXPOdNbaqnO.PD0z1hR8G5wyq1/2mCiXE6gXHyN9oy.', 'user@gmail.com', 'BEED', 'Program Head', 'supply_user', 'uploads/ehrrdfhqe6231.jpg', '12312124', 'id/ehrrdfhqe6231.jpg'),
+(14, 'bsit000110001', '$2y$10$H.iTppe0ff8UQVLaheOKLeqdJt.xk3xV0tlq5vXYMK1oNexGy88iC', 'user@gmail.com', 'BSIT', 'Program Head', 'supply_user', 'uploads/b90b42869d60cd52c1949096dfd93c04b977ed55r1-750-1034v2_hq.jpg', '12312124', 'id/b90b42869d60cd52c1949096dfd93c04b977ed55r1-750-1034v2_hq.jpg'),
+(15, 'bcriminale', '$2y$10$rD85vNFxQiuqMluFGvObHulVtCaz5.sBt1lN6oQkeD1jKNV4ly9sa', 'user@gmail.com', 'BSCRIM', 'Program Head', 'supply_user', 'uploads/images (1).jpg', '12312124', 'id/images (1).jpg');
 
 -- --------------------------------------------------------
 
@@ -210,7 +251,7 @@ CREATE TABLE `borrowed_item` (
   `borrowed_amount` int(11) NOT NULL,
   `request_destination` text NOT NULL,
   `request_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `borrowed_item`
@@ -260,38 +301,19 @@ CREATE TABLE `inventory` (
   `item_type` text NOT NULL,
   `img` varchar(255) NOT NULL,
   `Locate` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `inventory`
 --
 
 INSERT INTO `inventory` (`id`, `item_code`, `equipment_name`, `equipment_brand`, `equipment_model`, `quantity`, `item_type`, `img`, `Locate`) VALUES
-(11, '2143152', 'iPhone 15 Pro Max', 'Apple', '234523', 788, 'consumable', 'uploads/purepng.com-wifi-icon-blackwifi-iconwifiiconwireless-connection-17015284361412yp74.png', 'Unspecified'),
-(12, '34a', '33', '3', '3', 45, 'consumable', 'uploads/supply_officer-icon.png', 'BSCRIM'),
-(14, '777', '777', '777', '777', 635, 'non-consumable', '', 'BSCRIM'),
-(16, '990908', 'ytr765hgj', 'hjgi776', 'kfgi765', 12285, 'non-consumable', '', 'BSBS'),
-(21, '1214462452', 'Laptop', 'Samsung', 'ase353adf', 0, 'consumable', '', 'BSHM'),
 (26, '1111000000', 'iPhone 15 Pro Max', 'q24244354352', 'i15PMx', 0, 'non-consumable', '', 'Supply Officer'),
-(27, '7636490063435', 'HDD', 'SEAGATE', '320ADG', 80, 'consumable', '', 'Supply Officer'),
-(28, '863320063528200', 'Realme', 'Realme', '3254352', 2, 'non-consumable', '', 'Supply Officer'),
-(29, 'ABCD', 'abcd', 'efgh', 'EFGH', 12330, 'consumable', '', 'Supply Officer'),
-(31, '883412740890', 'Nike Air Force One', 'Nike', '1242425', 0, 'non-consumable', '', 'Supply Officer'),
-(32, '4902505088933', 'marker', 'pilot', 'N/A', 4, 'consumable', '', ''),
-(33, '789456', 'Monitor', 'Acer', 'ASFT451', 1, 'non-consumable', '', ''),
-(34, '0101132401', 'Marker - Pilot', 'HVW', '00000001', 9, 'consumable', '', ''),
-(35, '1234567890', '1234567890', '1234567890', '1234567890', 1234567876, 'non-consumable', '', ''),
-(36, '8994993002672', 'Garnier', 'Garnier', 'Yogurt Sleeping Mask', 6784, 'consumable', '', ''),
-(37, 'bb', 'bb', 'bb', 'bb', 33, 'non-consumable', 'inventory/1710753050733.jpg', ''),
-(38, '1234124', 'user-12345', '1', '123', 2134124, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', 'Unspecified'),
-(39, '12', '12', '12', '12', 12, 'non-consumable', 'inventory/5da24471b8efc956c516b86d4a571e1d.jpg', 'BSHM'),
-(40, '1234124', 'user-12345', 'user@gmail.com', '123', 123, 'non-consumable', 'inventory/5da24471b8efc956c516b86d4a571e1d.jpg', 'HCS'),
-(41, '98765', '98765', '98765', '98765', 98765, 'non-consumable', 'inventory/5da24471b8efc956c516b86d4a571e1d.jpg', 'SHS'),
-(42, '123456789987654321', 'qwerqwer', 'qwrqwr', 'qwrwqr', 2147483647, 'non-consumable', 'inventory/2143152.png', 'SHS'),
-(43, 'user-12345', 'user-12345', 'user-12345', 'user-12345', 12345, 'non-consumable', 'inventory/images.jpg', 'BSHM'),
-(44, 'acer', 'acer', 'acer', 'acer', 12, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', ''),
-(45, 'acer', 'acer', 'acer', 'acer', 123, 'non-consumable', 'inventory/419546073_856976492819303_895761370860930558_n.jpg', 'BSIT'),
-(49, 'bsit', 'name bsit', 'brand bsit', 'model bsit', 123, 'non-consumable', 'inventory/421793657_1767117097101005_665925613396737985_n.jpg', 'BSIT');
+(52, '04141912', 'Projector', 'Epson', 'L3110', -15, 'non-consumable', 'inventory/projector.jpg', 'BSIT'),
+(53, '12311998', 'Monitor', 'BenQ', 'GL2450-B', 15, 'non-consumable', 'inventory/monitor.jpg', 'BSIT'),
+(54, 'B23422879D', 'System Unit', 'Dell', '790-SFF', 20, 'non-consumable', 'inventory/system unit dell.jpg', 'BSIT'),
+(55, '1252108104614', 'Band Paper', 'Hard Copy', 'Long 70GSM', 10, 'consumable', 'inventory/346132418_825471735670257_5777869504284600006_n.jpg', 'Unspecified'),
+(57, '1', '1', '1', '1', 1, 'consumable', 'inventory/9c7f495b259f6fcddf5f279f4ee015ba.jpg', 'Supply Officer');
 
 -- --------------------------------------------------------
 
@@ -304,7 +326,7 @@ CREATE TABLE `log` (
   `time` time NOT NULL,
   `date` date NOT NULL,
   `action` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `log`
@@ -353,7 +375,18 @@ INSERT INTO `log` (`log_id`, `time`, `date`, `action`) VALUES
 (40, '07:38:29', '2024-04-02', 'admin has deleted asd'),
 (41, '08:08:47', '2024-04-02', 'admin has deleted 1234124'),
 (42, '08:09:03', '2024-04-02', 'admin has deleted 1234124'),
-(43, '10:28:52', '2024-04-04', 'admin has archived 1234124');
+(43, '10:28:52', '2024-04-04', 'admin has archived 1234124'),
+(44, '14:43:32', '2024-04-21', 'admin has archived user'),
+(45, '14:43:39', '2024-04-21', 'admin has archived karl1'),
+(46, '14:43:42', '2024-04-21', 'admin has archived 2'),
+(47, '14:43:45', '2024-04-21', 'admin has archived users'),
+(48, '14:43:48', '2024-04-21', 'admin has archived dd111@gmail.com'),
+(49, '14:43:51', '2024-04-21', 'admin has archived dd111@gmail.com'),
+(50, '14:43:54', '2024-04-21', 'admin has archived jessaa'),
+(51, '14:43:56', '2024-04-21', 'admin has archived shshshshshshs'),
+(52, '17:03:59', '2024-04-21', 'admin has archived beeducation'),
+(53, '17:04:01', '2024-04-21', 'admin has archived bsit000110001'),
+(54, '17:04:03', '2024-04-21', 'admin has archived bcriminale');
 
 -- --------------------------------------------------------
 
@@ -368,7 +401,7 @@ CREATE TABLE `merch` (
   `quantity` text NOT NULL,
   `measurement` text NOT NULL,
   `image` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `merch`
@@ -406,7 +439,7 @@ CREATE TABLE `request` (
   `return_date` date NOT NULL,
   `type` text NOT NULL,
   `reason` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `request`
@@ -434,14 +467,14 @@ CREATE TABLE `request_to_ph` (
   `type` text NOT NULL,
   `reason` text NOT NULL,
   `dept` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `request_to_ph`
 --
 
 INSERT INTO `request_to_ph` (`rid`, `id`, `rname`, `request_no`, `item_code`, `equipment_name`, `quantity`, `request_destination`, `return_date`, `type`, `reason`, `dept`) VALUES
-(0, 11, 'user', 1, 2143152, 'iPhone 15 Pro Max', 795, 'New Building', '0000-00-00', 'consumable', '1', 'BSIT');
+(1, 11, 'user', 1, 2143152, 'iPhone 15 Pro Max', 795, 'New Building', '0000-00-00', 'consumable', '1', 'BSIT');
 
 --
 -- Indexes for dumped tables
@@ -527,13 +560,13 @@ ALTER TABLE `accept`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234568;
+  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234583;
 
 --
 -- AUTO_INCREMENT for table `archive_inventory`
 --
 ALTER TABLE `archive_inventory`
-  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `archive_merch`
@@ -545,7 +578,7 @@ ALTER TABLE `archive_merch`
 -- AUTO_INCREMENT for table `archive_user`
 --
 ALTER TABLE `archive_user`
-  MODIFY `eid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `eid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `borrowed_item`
@@ -557,13 +590,13 @@ ALTER TABLE `borrowed_item`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `merch`
@@ -576,6 +609,12 @@ ALTER TABLE `merch`
 --
 ALTER TABLE `request`
   MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+
+--
+-- AUTO_INCREMENT for table `request_to_ph`
+--
+ALTER TABLE `request_to_ph`
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
