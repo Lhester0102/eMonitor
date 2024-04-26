@@ -12,6 +12,7 @@
         $item_type = $_POST['item_type'];
         $locate = $_POST['department'];
         $uploadDir = "inventory/";
+        //oke
 
         if (isset($_FILES['user_image']) && $_FILES['user_image']['error'] === UPLOAD_ERR_OK) {
             $image_name = $_FILES['user_image']['name'];
